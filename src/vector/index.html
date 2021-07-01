@@ -2,27 +2,27 @@
 <html lang="en" style="height: 100%;">
   <head>
     <meta charset="utf-8">
-    <title>Element</title>
-    <link rel="apple-touch-icon" sizes="57x57" href="<%= require('../../res/vector-icons/apple-touch-icon-57.png') %>">
-    <link rel="apple-touch-icon" sizes="60x60" href="<%= require('../../res/vector-icons/apple-touch-icon-60.png') %>">
-    <link rel="apple-touch-icon" sizes="72x72" href="<%= require('../../res/vector-icons/apple-touch-icon-72.png') %>">
-    <link rel="apple-touch-icon" sizes="76x76" href="<%= require('../../res/vector-icons/apple-touch-icon-76.png') %>">
-    <link rel="apple-touch-icon" sizes="114x114" href="<%= require('../../res/vector-icons/apple-touch-icon-114.png') %>">
-    <link rel="apple-touch-icon" sizes="120x120" href="<%= require('../../res/vector-icons/apple-touch-icon-120.png') %>">
-    <link rel="apple-touch-icon" sizes="144x144" href="<%= require('../../res/vector-icons/apple-touch-icon-144.png') %>">
-    <link rel="apple-touch-icon" sizes="152x152" href="<%= require('../../res/vector-icons/apple-touch-icon-152.png') %>">
-    <link rel="apple-touch-icon" sizes="180x180" href="<%= require('../../res/vector-icons/apple-touch-icon-180.png') %>">
+    <title>With Sumrachat, you can send messages, make HD voice or video calls and share timeline stories — for FREE!</title>
+<meta content="Sumrachat is the most secure collaboration platform. We increase the productivity in your team while keeping your information private. Sumrachat allows your team to communicate and share information easily and securely - messages, files, conference calls or private conversations - always in context." name="description">
+<meta content="With Sumrachat, you can send messages, make HD voice or video calls and share timeline stories — for FREE!" property="og:title">
+<meta content="Sumrachat is the most secure collaboration platform. We increase the productivity in your team while keeping your information private. Sumrachat allows your team to communicate and share information easily and securely - messages, files, conference calls or private conversations - always in context." property="og:description">
+<meta content="../../res/vector-icons/og.png" property="og:image">
+<meta content="With Sumrachat, you can send messages, make HD voice or video calls and share timeline stories — for FREE!" property="twitter:title">
+<meta content="Sumrachat is the most secure collaboration platform. We increase the productivity in your team while keeping your information private. Sumrachat allows your team to communicate and share information easily and securely - messages, files, conference calls or private conversations - always in context." property="twitter:description">
+<meta content="../../res/vector-icons/og.png" property="twitter:image">
+<meta property="og:type" content="website">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="width=device-width, initial-scale=1" name="viewport">
+<link href="<%= require('../../res/vector-icons/favicon.png') %>" rel="shortcut icon" type="image/x-icon">
+<link href="<%= require('../../res/vector-icons/webclip.png') %>" rel="apple-touch-icon">
     <link rel="manifest" href="manifest.json">
     <meta name="referrer" content="no-referrer">
-    <link rel="shortcut icon" href="<%= require('../../res/vector-icons/favicon.ico') %>">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="apple-mobile-web-app-title" content="Element">
-    <meta name="application-name" content="Element">
+    <meta name="apple-mobile-web-app-title" content="Sumrachat">
+    <meta name="application-name" content="Sumrachat">
     <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="msapplication-TileImage" content="<%= require('../../res/vector-icons/mstile-150.png') %>">
+    <meta name="msapplication-TileImage" content="<%= require('../../res/vector-icons/webclip.png') %>">
     <meta name="msapplication-config" content="<%= require('../../res/vector-icons/browserconfig.xml') %>">
     <meta name="theme-color" content="#ffffff">
-    <meta property="og:image" content="<%= og_image_url %>" />
     <meta http-equiv="Content-Security-Policy" content="
         default-src 'none';
         style-src 'self' 'unsafe-inline';
@@ -35,6 +35,7 @@
         worker-src 'self';
         frame-src * blob: data:;
         form-action 'self';
+        object-src 'self';
         manifest-src 'self';
     ">
     <% for (var i=0; i < htmlWebpackPlugin.files.css.length; i++) {
@@ -64,7 +65,7 @@
       data-vector-recorder-worklet-script="<%= htmlWebpackPlugin.files.js.find(entry => entry.includes("recorder-worklet.js")) %>"
   >
     <noscript>Sorry, Element requires JavaScript to be enabled.</noscript> <!-- TODO: Translate this? -->
-    <section id="matrixchat" style="height: 100%;" class="notranslate"></section>
+    <section id="matrixchat" style="height: 100%; overflow: auto;" class="notranslate"></section>
     <script src="<%= htmlWebpackPlugin.files.js.find(entry => entry.includes("bundle.js")) %>"></script>
 
     <!-- Legacy supporting Prefetch images -->

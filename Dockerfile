@@ -10,8 +10,8 @@ ARG JS_SDK_REPO="https://github.com/matrix-org/matrix-js-sdk.git"
 ARG JS_SDK_BRANCH="master"
 
 RUN apt-get update && apt-get install -y git dos2unix \
-# These packages are required for building Canvas on architectures like Arm
-# See https://www.npmjs.com/package/canvas#compiling
+  # These packages are required for building Canvas on architectures like Arm
+  # See https://www.npmjs.com/package/canvas#compiling
   build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
 
 WORKDIR /src
@@ -22,7 +22,7 @@ RUN yarn --network-timeout=100000 install
 RUN yarn build
 
 # Copy the config now so that we don't create another layer in the app image
-RUN cp /src/config.sample.json /src/webapp/config.json
+RUN cp /src/config.json /src/webapp/config.json
 
 # Ensure we populate the version file
 RUN dos2unix /src/scripts/docker-write-version.sh && bash /src/scripts/docker-write-version.sh
