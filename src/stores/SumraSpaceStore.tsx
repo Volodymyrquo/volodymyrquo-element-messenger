@@ -14,30 +14,24 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-
-import {AsyncStoreWithClient} from "matrix-react-sdk/src/stores/AsyncStoreWithClient";
+import { AsyncStoreWithClient } from "matrix-react-sdk/src/stores/AsyncStoreWithClient";
 import defaultDispatcher from "matrix-react-sdk/src/dispatcher/dispatcher";
-import {EnhancedMap, mapDiff} from "matrix-react-sdk/src/utils/maps";
-import {ListIteratee, Many, sortBy, throttle} from "lodash";
+import { EnhancedMap, mapDiff } from "matrix-react-sdk/src/utils/maps";
+import { ListIteratee, Many, sortBy, throttle } from "lodash";
 import SettingsStore from "matrix-react-sdk/src/settings/SettingsStore";
-import {EventType, RoomType} from "matrix-js-sdk/src/@types/event";
-import {Room} from "matrix-js-sdk/src/models/room";
-import {ActionPayload} from "matrix-react-sdk/src/dispatcher/payloads";
-import {MatrixEvent} from "matrix-js-sdk/src/models/event";
+import { EventType, RoomType } from "matrix-js-sdk/src/@types/event";
+import { Room } from "matrix-js-sdk/src/models/room";
+import { ActionPayload } from "matrix-react-sdk/src/dispatcher/payloads";
+import { MatrixEvent } from "matrix-js-sdk/src/models/event";
 import DMRoomMap from "matrix-react-sdk/src/utils/DMRoomMap";
-import {FetchRoomFn} from "matrix-react-sdk/src/stores/notifications/ListNotificationState";
-import {SpaceNotificationState} from "matrix-react-sdk/src/stores/notifications/SpaceNotificationState";
-import {DefaultTagID} from "matrix-react-sdk/src/stores/room-list/models";
-import {setHasDiff} from "matrix-react-sdk/src/utils/sets";
-import {ISpaceSummaryEvent, ISpaceSummaryRoom} from "matrix-react-sdk/src/components/structures/SpaceRoomDirectory";
+import { FetchRoomFn } from "matrix-react-sdk/src/stores/notifications/ListNotificationState";
+import { SpaceNotificationState } from "matrix-react-sdk/src/stores/notifications/SpaceNotificationState";
+import { DefaultTagID } from "matrix-react-sdk/src/stores/room-list/models";
+import { setHasDiff } from "matrix-react-sdk/src/utils/sets";
+import { ISpaceSummaryEvent, ISpaceSummaryRoom } from "matrix-react-sdk/src/components/structures/SpaceRoomDirectory";
 import RoomViewStore from "matrix-react-sdk/src/stores/RoomViewStore";
 import RoomListStore from "./room-list/SumraRoomListStore";
-import {RoomNotificationStateStore} from "./notifications/SumraRoomNotificationStateStore";
-
-
-
-
-
+import { RoomNotificationStateStore } from "./notifications/SumraRoomNotificationStateStore";
 
 interface IState {}
 
@@ -77,7 +71,7 @@ export const getOrder = (order: string, creationTs: number, roomId: string): Arr
     }
 
     return [validatedOrder, creationTs, roomId];
-}
+};
 
 const getRoomFn: FetchRoomFn = (room: Room) => {
     return RoomNotificationStateStore.instance.getRoomState(room);
@@ -345,11 +339,11 @@ export class SpaceStoreClass extends AsyncStoreWithClient<IState> {
         // build initial state of invited spaces as we would have missed the emitted events about the room at launch
         this._invitedSpaces = new Set(invitedSpaces);
         this.emit(UPDATE_INVITED_SPACES, this.invitedSpaces);
-    }, 100, {trailing: true, leading: true});
+    }, 100, { trailing: true, leading: true });
 
     onSpaceUpdate = () => {
         this.rebuild();
-    }
+    };
 
     private onSpaceMembersChange = (ev: MatrixEvent) => {
         // skip this update if we do not have a DM with this user
@@ -418,7 +412,7 @@ export class SpaceStoreClass extends AsyncStoreWithClient<IState> {
                 return false;
             }));
         });
-    }, 100, {trailing: true, leading: true});
+    }, 100, { trailing: true, leading: true });
 
     private switchToRelatedSpace = (roomId: string) => {
         if (this.suggestedRooms.find(r => r.room_id === roomId)) return;

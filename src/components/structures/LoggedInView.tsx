@@ -31,7 +31,7 @@ import ResizeHandle from 'matrix-react-sdk/src/components/views/elements/ResizeH
 import { Resizer, CollapseDistributor } from 'matrix-react-sdk/src/resizer';
 import MatrixClientContext from "matrix-react-sdk/src/contexts/MatrixClientContext";
 import * as KeyboardShortcuts from "matrix-react-sdk/src/accessibility/KeyboardShortcuts";
-import HomePage from "matrix-react-sdk/src/components/structures/HomePage";
+import HomePage from "./HomePage";
 import ResizeNotifier from "matrix-react-sdk/src/utils/ResizeNotifier";
 import PlatformPeg from "matrix-react-sdk/src/PlatformPeg";
 import { DefaultTagID } from "matrix-react-sdk/src/stores/room-list/models";
