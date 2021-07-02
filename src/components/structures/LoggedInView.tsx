@@ -51,6 +51,9 @@ import { IOpts } from "matrix-react-sdk/src/createRoom";
 import CallHandler, { CallHandlerEvent } from '../../SumraCallHandler';
 import { MatrixCall } from 'matrix-js-sdk/src/webrtc/call';
 import AudioFeedArrayForCall from 'matrix-react-sdk/src/components/views/voip/AudioFeedArrayForCall';
+import { HashRouter as Router, Switch, Route } from "react-router-dom";
+import ContactBook from "../views/contact_book/ContactBook.jsx";
+import Main from "../views/contact_book/Main.jsx";
 
 // We need to fetch each pinned message individually (if we don't already have it)
 // so each pinned message may trigger a request. Limit the number per room for sanity.
@@ -622,31 +625,41 @@ class LoggedInView extends React.Component<IProps, IState> {
         const SpacePanel = sdk.getComponent("views.spaces.SpacePanel");
 
         return (
-            <MatrixClientContext.Provider value={this._matrixClient}>
-                <div
-                    onPaste={this._onPaste}
-                    onKeyDown={this._onReactKeyDown}
-                    className='mx_MatrixChat_wrapper'
-                    aria-hidden={this.props.hideToSRUsers}
-                >
-                    <ToastContainer />
-                    <div ref={this._resizeContainer} className={bodyClasses}>
-                        { SettingsStore.getValue("feature_spaces") ? <SpacePanel /> : null }
-                        <LeftPanel
-                            isMinimized={this.props.collapseLhs || false}
-                            resizeNotifier={this.props.resizeNotifier}
-                        />
-                        <ResizeHandle />
-                        { pageElement }
+            <>  <Router>
+                <MatrixClientContext.Provider value={this._matrixClient}>
+                    <div
+                        onPaste={this._onPaste}
+                        onKeyDown={this._onReactKeyDown}
+                        className='mx_MatrixChat_wrapper'
+                        aria-hidden={this.props.hideToSRUsers}
+                    >
+                        <ToastContainer />
+                        <div ref={this._resizeContainer} className={bodyClasses}>
+                            { SettingsStore.getValue("feature_spaces") ? <SpacePanel /> : null }
+                            <LeftPanel
+                                isMinimized={this.props.collapseLhs || false}
+                                resizeNotifier={this.props.resizeNotifier}
+                            />
+                            <ResizeHandle />
+                            { pageElement }
+                        </div>
                     </div>
-                </div>
-                <CallContainer />
-                <NonUrgentToastContainer />
-                <HostSignupContainer />
-                {audioFeedArraysForCalls}
-            </MatrixClientContext.Provider>
+                    <CallContainer />
+                    <NonUrgentToastContainer />
+                    <HostSignupContainer />
+                    {audioFeedArraysForCalls}
+                </MatrixClientContext.Provider>
+
+               
+                <Switch>
+                    <Route path="/contact_book" component={ContactBook} />
+                    <Route path="/main" component={Main} />
+                </Switch>
+                </Router>
+            </>
         );
     }
 }
 
 export default LoggedInView;
+

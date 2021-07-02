@@ -487,7 +487,10 @@ export default class SumraLeftPanel extends React.Component<IProps, IState> {
                             {roomList}
                         </div>
                     </div>
-              
+                    <ul>
+                    <li><a href="/#/contact_book">Contact book</a></li>
+                    <li><a href="/#/main">Main</a></li>
+                </ul>
                     { !this.props.isMinimized && <LeftPanelWidget /> }
                 </aside>
             </div>
