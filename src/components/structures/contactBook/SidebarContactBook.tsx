@@ -24,6 +24,12 @@ const SidebarContactBook: FC = () => {
                         setBurger(!burger);
                     }}
                 >
+                    <div id="menuToggle">
+                        <input type="checkbox" />
+                        <span id="span1"></span>
+                        <span id="span2"></span>
+                        <span id="span3"></span>
+                    </div>
                 </div>
             </div>
             <h3 className="contact-book__title-sidebar">Contacts</h3>
