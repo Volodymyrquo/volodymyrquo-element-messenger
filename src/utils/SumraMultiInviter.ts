@@ -22,8 +22,8 @@ import GroupStore from 'matrix-react-sdk/src/stores/GroupStore';
 import { _t } from "matrix-react-sdk/src/languageHandler";
 import Modal from "matrix-react-sdk/src/Modal";
 import SettingsStore from "matrix-react-sdk/src/settings/SettingsStore";
-import { defer, IDeferred } from "matrix-react-sdk/src/utils/promise";
-import * as sdk from "matrix-react-sdk/src/index"; 
+import { defer, IDeferred } from "matrix-js-sdk/src/utils";
+import * as sdk from "matrix-react-sdk/src/index";
 
 export enum InviteState {
     Invited = "invited",

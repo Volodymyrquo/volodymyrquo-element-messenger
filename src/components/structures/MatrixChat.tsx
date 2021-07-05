@@ -39,7 +39,7 @@ import linkifyMatrix from "matrix-react-sdk/src/linkify-matrix";
 import * as Lifecycle from '../../SumraLifecycle';
 // LifecycleStore is not used but does listen to and dispatch actions
 import 'matrix-react-sdk/src/stores/LifecycleStore';
-import PageTypes from 'matrix-react-sdk/src/PageTypes';
+import PageTypes from '../../SumraPageTypes';
 import createRoom, { IOpts } from "../../sumraCreateRoom";
 import { _t, _td, getCurrentLanguage } from 'matrix-react-sdk/src/languageHandler';
 import SettingsStore from "matrix-react-sdk/src/settings/SettingsStore";
@@ -52,7 +52,7 @@ import DMRoomMap from 'matrix-react-sdk/src/utils/DMRoomMap';
 import ThemeWatcher from "matrix-react-sdk/src/settings/watchers/ThemeWatcher";
 import { FontWatcher } from 'matrix-react-sdk/src/settings/watchers/FontWatcher';
 import { storeRoomAliasInCache } from 'matrix-react-sdk/src/RoomAliasCache';
-import { defer, IDeferred, sleep } from "matrix-react-sdk/src/utils/promise";
+import { defer, IDeferred, sleep } from "matrix-js-sdk/src/utils";
 import ToastStore from "matrix-react-sdk/src/stores/ToastStore";
 import * as StorageManager from "matrix-react-sdk/src/utils/StorageManager";
 import type LoggedInViewType from "./LoggedInView";
@@ -79,7 +79,6 @@ import defaultDispatcher from "matrix-react-sdk/src/dispatcher/dispatcher";
 import SecurityCustomisations from "matrix-react-sdk/src/customisations/Security";
 import PerformanceMonitor, { PerformanceEntryNames } from "matrix-react-sdk/src/performance";
 import UIStore, { UI_EVENTS } from "matrix-react-sdk/src/stores/UIStore";
-
 
 /** constants for MatrixChat.state.view */
 export enum Views {
@@ -196,7 +195,7 @@ interface IState {
     resizeNotifier: ResizeNotifier;
     serverConfig?: ValidatedServerConfig;
     ready: boolean;
-    threepidInvite?: IThreepidInvite,
+    threepidInvite?: IThreepidInvite;
     roomOobData?: object;
     pendingInitialSync?: boolean;
     justRegistered?: boolean;
@@ -204,7 +203,7 @@ interface IState {
 }
 
 export default class MatrixChat extends React.PureComponent<IProps, IState> {
-    static replaces = "MatrixChat"
+    static replaces = "MatrixChat";
     static displayName = "MatrixChat";
 
     static defaultProps = {
@@ -512,9 +511,9 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
     onAction = (payload) => {
         // console.log(`MatrixClientPeg.onAction: ${payload.action}`);
         const QuestionDialog = sdk.getComponent("dialogs.QuestionDialog");
-        const ErrorDialog = sdk.getComponent("views.dialogs.ErrorDialog")
-        const CreateCommunityPrototypeDialog = sdk.getComponent("views.dialogs.CreateCommunityPrototypeDialog")
-        const DialPadModal = sdk.getComponent("views.voip.DialPadModal")
+        const ErrorDialog = sdk.getComponent("views.dialogs.ErrorDialog");
+        const CreateCommunityPrototypeDialog = sdk.getComponent("views.dialogs.CreateCommunityPrototypeDialog");
+        const DialPadModal = sdk.getComponent("views.voip.DialPadModal");
 
         // Start the onboarding process for certain actions
         if (MatrixClientPeg.get() && MatrixClientPeg.get().isGuest() &&
@@ -695,6 +694,10 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
             case 'view_home_page':
                 this.viewHome(payload.justRegistered);
                 break;
+            case 'view_contact_book_page':
+                this.viewContactBook(payload.justRegistered);
+                break;
+
             case 'view_start_chat_or_reuse':
                 this.chatCreateOrReuse(payload.user_id);
                 break;
@@ -985,6 +988,18 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
         this.themeWatcher.recheck();
     }
 
+    private viewContactBook(justRegistered = false) {
+        // The contact book page requires the "logged in" view, so we'll set that.
+        this.setStateForNewView({
+            view: Views.LOGGED_IN,
+            justRegistered,
+        });
+        this.setPage(PageTypes.ContactBook);
+        this.notifyNewScreen('contact_book');
+        ThemeController.isLogin = false;
+        this.themeWatcher.recheck();
+    }
+
     private viewUser(userId: string, subAction: string) {
         // Wait for the first sync so that `getRoom` gives us a room object if it's
         // in the sync response
@@ -1002,7 +1017,7 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
     }
 
     private async createRoom(defaultPublic = false, defaultName?: string) {
-        const ErrorDialog = sdk.getComponent("views.dialogs.ErrorDialog")
+        const ErrorDialog = sdk.getComponent("views.dialogs.ErrorDialog");
 
         const communityId = CommunityPrototypeStore.instance.getSelectedCommunityId();
         if (communityId) {
@@ -1155,7 +1170,7 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
 
     private forgetRoom(roomId: string) {
         const room = MatrixClientPeg.get().getRoom(roomId);
-        const ErrorDialog = sdk.getComponent("views.dialogs.ErrorDialog")
+        const ErrorDialog = sdk.getComponent("views.dialogs.ErrorDialog");
 
         MatrixClientPeg.get().forget(roomId).then(() => {
             // Switch to home page if we're currently viewing the forgotten room
@@ -1356,7 +1371,7 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
         this.firstSyncComplete = false;
         this.firstSyncPromise = defer();
         const cli = MatrixClientPeg.get();
-        const ErrorDialog = sdk.getComponent("views.dialogs.ErrorDialog")
+        const ErrorDialog = sdk.getComponent("views.dialogs.ErrorDialog");
 
         // Allow the JS SDK to reap timeline events. This reduces the amount of
         // memory consumed as the JS SDK stores multiple distinct copies of room
@@ -1650,6 +1665,10 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
         } else if (screen === 'home') {
             dis.dispatch({
                 action: 'view_home_page',
+            });
+        } else if (screen === 'contact_book') {
+            dis.dispatch({
+                action: 'view_contact_book_page',
             });
         } else if (screen === 'start') {
             this.showScreen('home');

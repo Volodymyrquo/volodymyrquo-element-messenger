@@ -26,13 +26,13 @@ import { BreadcrumbsStore } from "matrix-react-sdk/src/stores/BreadcrumbsStore";
 import SettingsStore from "matrix-react-sdk/src/settings/SettingsStore";
 import { UPDATE_EVENT } from "matrix-react-sdk/src/stores/AsyncStore";
 import { OwnProfileStore } from "matrix-react-sdk/src/stores/OwnProfileStore";
-import UIStore from "matrix-react-sdk/src/stores/UIStore"; 
+import UIStore from "matrix-react-sdk/src/stores/UIStore";
 import ResizeNotifier from "matrix-react-sdk/src/utils/ResizeNotifier";
-import {mediaFromMxc} from "matrix-react-sdk/src/customisations/Media";
+import { mediaFromMxc } from "matrix-react-sdk/src/customisations/Media";
 import { getKeyBindingsManager, RoomListAction } from "matrix-react-sdk/src/KeyBindingsManager";
-import SpaceStore, {UPDATE_SELECTED_SPACE} from "../../stores/SumraSpaceStore"; 
+import SpaceStore, { UPDATE_SELECTED_SPACE } from "../../stores/SumraSpaceStore";
 import RoomListStore, { LISTS_UPDATE_EVENT } from "../../stores/room-list/SumraRoomListStore";
-
+import { Link } from "react-router-dom";
 
 import * as sdk from "matrix-react-sdk/src/index";
 
@@ -58,16 +58,14 @@ const cssClasses = [
     "mx_RoomSublist_showNButton",
 ];
 
-
 export default class SumraLeftPanel extends React.Component<IProps, IState> {
-    static replaces = "LeftPanel"
+    static replaces = "LeftPanel";
     private ref: React.RefObject<HTMLDivElement> = createRef();
     private listContainerRef: React.RefObject<HTMLDivElement> = createRef();
     private groupFilterPanelWatcherRef: string;
     private bgImageWatcherRef: string;
     private focusedElement = null;
     private isDoingStickyHeaders = false;
-
 
     constructor(props: IProps) {
         super(props);
@@ -76,16 +74,16 @@ export default class SumraLeftPanel extends React.Component<IProps, IState> {
             showBreadcrumbs: BreadcrumbsStore.instance.visible,
             showGroupFilterPanel: SettingsStore.getValue('TagPanel.enableTagPanel'),
              activeSpace: SpaceStore.instance.activeSpace,
-       };
+        };
 
         BreadcrumbsStore.instance.on(UPDATE_EVENT, this.onBreadcrumbsUpdate);
         RoomListStore.instance.on(LISTS_UPDATE_EVENT, this.onBreadcrumbsUpdate);
         OwnProfileStore.instance.on(UPDATE_EVENT, this.onBackgroundImageUpdate);
-         SpaceStore.instance.on(UPDATE_SELECTED_SPACE, this.updateActiveSpace); 
+        SpaceStore.instance.on(UPDATE_SELECTED_SPACE, this.updateActiveSpace);
         this.bgImageWatcherRef = SettingsStore.watchSetting(
             "RoomList.backgroundImage", null, this.onBackgroundImageUpdate);
         this.groupFilterPanelWatcherRef = SettingsStore.watchSetting("TagPanel.enableTagPanel", null, () => {
-            this.setState({showGroupFilterPanel: SettingsStore.getValue("TagPanel.enableTagPanel")});
+            this.setState({ showGroupFilterPanel: SettingsStore.getValue("TagPanel.enableTagPanel") });
         });
     }
 
@@ -98,14 +96,13 @@ export default class SumraLeftPanel extends React.Component<IProps, IState> {
     }
 
     public componentWillUnmount() {
-
         SettingsStore.unwatchSetting(this.groupFilterPanelWatcherRef);
         SettingsStore.unwatchSetting(this.bgImageWatcherRef);
         BreadcrumbsStore.instance.off(UPDATE_EVENT, this.onBreadcrumbsUpdate);
-       RoomListStore.instance.off(LISTS_UPDATE_EVENT, this.onBreadcrumbsUpdate);
+        RoomListStore.instance.off(LISTS_UPDATE_EVENT, this.onBreadcrumbsUpdate);
         OwnProfileStore.instance.off(UPDATE_EVENT, this.onBackgroundImageUpdate);
-        SpaceStore.instance.off(UPDATE_SELECTED_SPACE, this.updateActiveSpace); 
-         UIStore.instance.stopTrackingElementDimensions("ListContainer");
+        SpaceStore.instance.off(UPDATE_SELECTED_SPACE, this.updateActiveSpace);
+        UIStore.instance.stopTrackingElementDimensions("ListContainer");
         UIStore.instance.removeListener("ListContainer", this.refreshStickyHeaders);
         this.listContainerRef.current?.removeEventListener("scroll", this.onScroll);
     }
@@ -127,12 +124,12 @@ export default class SumraLeftPanel extends React.Component<IProps, IState> {
     private refreshStickyHeaders = () => {
         if (!this.listContainerRef.current) return; // ignore: no headers to sticky
         this.handleStickyHeaders(this.listContainerRef.current);
-    }
+    };
 
     private onBreadcrumbsUpdate = () => {
         const newVal = BreadcrumbsStore.instance.visible;
         if (newVal !== this.state.showBreadcrumbs) {
-            this.setState({showBreadcrumbs: newVal});
+            this.setState({ showBreadcrumbs: newVal });
 
             // Update the sticky headers too as the breadcrumbs will be popping in or out.
             if (!this.listContainerRef.current) return; // ignore: no headers to sticky
@@ -182,7 +179,6 @@ export default class SumraLeftPanel extends React.Component<IProps, IState> {
         let lastTopHeader;
         let firstBottomHeader;
         for (const sublist of sublists) {
-
             const header = sublist.querySelector<HTMLDivElement>(".mx_RoomSublist_stickable");
             header.style.removeProperty("display"); // always clear display:none first
 
@@ -371,19 +367,18 @@ export default class SumraLeftPanel extends React.Component<IProps, IState> {
     };
 
     private renderHeader(): React.ReactNode {
-        
-        const UserMenu = sdk.getComponent("structures.UserMenu")
+        const UserMenu = sdk.getComponent("structures.UserMenu");
         return (
             <div className="mx_LeftPanel_userHeader">
                 <UserMenu isMinimized={this.props.isMinimized} />
-               
+
             </div>
         );
     }
 
     private renderBreadcrumbs(): React.ReactNode {
-        const RoomBreadcrumbs = sdk.getComponent("views.rooms.RoomBreadcrumbs")
-        const IndicatorScrollbar = sdk.getComponent("structures.IndicatorScrollbar")
+        const RoomBreadcrumbs = sdk.getComponent("views.rooms.RoomBreadcrumbs");
+        const IndicatorScrollbar = sdk.getComponent("structures.IndicatorScrollbar");
         if (this.state.showBreadcrumbs && !this.props.isMinimized) {
             return (
                 <IndicatorScrollbar
@@ -394,17 +389,16 @@ export default class SumraLeftPanel extends React.Component<IProps, IState> {
                     tabIndex={-1}
                 >
                     <RoomBreadcrumbs />
-                    
+
                 </IndicatorScrollbar>
             );
         }
     }
 
     private renderSearchExplore(): React.ReactNode {
+        const RoomSearch = sdk.getComponent("structures.RoomSearch");
+        const AccessibleTooltipButton = sdk.getComponent("views.elements.AccessibleTooltipButton");
 
-        const RoomSearch = sdk.getComponent("structures.RoomSearch")
-        const AccessibleTooltipButton = sdk.getComponent("views.elements.AccessibleTooltipButton")
-        
         return (
             <div
                 className="mx_LeftPanel_filterContainer"
@@ -424,7 +418,6 @@ export default class SumraLeftPanel extends React.Component<IProps, IState> {
                     onClick={this.onExplore}
                     title={_t("Explore rooms")}
                 />
-                                        
 
             </div>
         );
@@ -433,9 +426,9 @@ export default class SumraLeftPanel extends React.Component<IProps, IState> {
     public render(): React.ReactNode {
         let leftLeftPanel;
 
-        const GroupFilterPanel = sdk.getComponent("structures.GroupFilterPanel")
-        const CustomRoomTagPanel = sdk.getComponent("structures.CustomRoomTagPanel")
-        const RoomList = sdk.getComponent("views.rooms.RoomList")
+        const GroupFilterPanel = sdk.getComponent("structures.GroupFilterPanel");
+        const CustomRoomTagPanel = sdk.getComponent("structures.CustomRoomTagPanel");
+        const RoomList = sdk.getComponent("views.rooms.RoomList");
         if (this.state.showGroupFilterPanel) {
             leftLeftPanel = (
                 <div className="mx_LeftPanel_GroupFilterPanelContainer">
@@ -465,8 +458,8 @@ export default class SumraLeftPanel extends React.Component<IProps, IState> {
             "mx_LeftPanel_actualRoomListContainer",
             "mx_AutoHideScrollbar",
         );
-        const RoomListNumResults = sdk.getComponent("views.rooms.RoomListNumResults")
-        const LeftPanelWidget = sdk.getComponent("structures.LeftPanelWidget")
+        const RoomListNumResults = sdk.getComponent("views.rooms.RoomListNumResults");
+        const LeftPanelWidget = sdk.getComponent("structures.LeftPanelWidget");
         return (
             <div className={containerClasses} ref={this.ref}>
                 {leftLeftPanel}
@@ -474,7 +467,7 @@ export default class SumraLeftPanel extends React.Component<IProps, IState> {
                     {this.renderHeader()}
                     {this.renderSearchExplore()}
                     {this.renderBreadcrumbs()}
-                 
+
                     <RoomListNumResults onVisibilityChange={this.refreshStickyHeaders} />
                     <div className="mx_LeftPanel_roomListWrapper">
                         <div
@@ -487,10 +480,7 @@ export default class SumraLeftPanel extends React.Component<IProps, IState> {
                             {roomList}
                         </div>
                     </div>
-                    <ul>
-                    <li><a href="/#/contact_book">Contact book</a></li>
-                    <li><a href="/#/main">Main</a></li>
-                </ul>
+                    <div className="sumra-contact-book-link"><Link to="/contact_book">Contact book</Link></div>
                     { !this.props.isMinimized && <LeftPanelWidget /> }
                 </aside>
             </div>
