@@ -15,6 +15,7 @@
     top: 0px;
     z-index: 2;
     background-color: #fafafc;
+    padding: 30px;
 }
 .contact-book__header-contacts {
     display: flex;
@@ -76,6 +77,9 @@
     .contact-book__img-person {
         left: 10px;
     }
+    .contact-book__main-content {
+        width: 100%;
+    }
 }
 .contact-book__name-person {
     margin: 0;
@@ -113,6 +117,9 @@
     .contact-book__input-inner {
         flex-wrap: wrap;
     }
+    .contact-book__main-content {
+        width: 100%;
+    }
 }
 .contact-book__for-select {
     display: flex;
@@ -122,6 +129,9 @@
 @media (max-width: 432px) {
     .contact-book__for-select {
         flex-wrap: wrap;
+    }
+    .contact-book__main-content {
+        width: 100%;
     }
 }
 .contact-book__sort-alphabet {
@@ -139,6 +149,9 @@
 }
 @media (max-width: 660px) {
     .contact-book__sort-alphabet {
+        width: 100%;
+    }
+    .contact-book__main-content {
         width: 100%;
     }
 }

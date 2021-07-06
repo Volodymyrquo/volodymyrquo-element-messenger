@@ -466,7 +466,10 @@ export default class SumraLeftPanel extends React.Component<IProps, IState> {
                 <aside className="mx_LeftPanel_roomListContainer">
                     {this.renderHeader()}
                     {this.renderSearchExplore()}
+                    <div className="sumra-contact-book-link"><Link to="/contact_book">Contact book</Link></div> 
+
                     {this.renderBreadcrumbs()}
+
 
                     <RoomListNumResults onVisibilityChange={this.refreshStickyHeaders} />
                     <div className="mx_LeftPanel_roomListWrapper">
@@ -480,7 +483,7 @@ export default class SumraLeftPanel extends React.Component<IProps, IState> {
                             {roomList}
                         </div>
                     </div>
-                    <div className="sumra-contact-book-link"><Link to="/contact_book">Contact book</Link></div>
+
                     { !this.props.isMinimized && <LeftPanelWidget /> }
                 </aside>
             </div>

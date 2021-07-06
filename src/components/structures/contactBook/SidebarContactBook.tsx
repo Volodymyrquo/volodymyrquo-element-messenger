@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import logo from '../../../../res/images/contactBook/logo.svg';
+import logo from "../../../../res/images/contactBook/logo.svg";
 import NavigationSidebar from './NavigationSidebar';
 import { Link, useRouteMatch } from "react-router-dom";
 import plus from "../../../../res/images/contactBook/plus.svg";

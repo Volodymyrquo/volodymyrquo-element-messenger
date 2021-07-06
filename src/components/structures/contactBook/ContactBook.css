@@ -105,9 +105,9 @@ h6 {
 }
 .sumra-contact-book-link {
     position: relative;
-    bottom: calc(100% - 250px);
     padding: 25px;
 }
+
 .sumra-contact-book-link a {
     font-family: Inter, Twemoji, "Apple Color Emoji", "Segoe UI Emoji", Arial,
         Helvetica, Sans-Serif, "Noto Color Emoji";
