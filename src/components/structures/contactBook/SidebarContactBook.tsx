@@ -2,6 +2,7 @@ import React, { FC, useState} from 'react';
 import logo from "../../../../res/images/contactBook/logo.svg";
 import NavigationSidebar from './NavigationSidebar';
 import plus from "../../../../res/images/contactBook/plus.svg";
+import "./SidebarContactBook.css"
 
 const SidebarContactBook: FC = () => {
     const [burger, setBurger] = useState(true);
@@ -43,7 +44,7 @@ const SidebarContactBook: FC = () => {
             </a>
 
             <a
-                href={{ pathname: "/contactBook/all_contacts", search: '?import-contacts=true' }}
+                href="#"
                 className="contact-book__btn-import"
             >
                 <i className="icon-Swap" />

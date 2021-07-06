@@ -20,7 +20,7 @@
     line-height: 100%;
     letter-spacing: 1px;
     text-transform: uppercase;
-    color: #fff;
+    color: #fff !important;
     transition: all 0.5s linear 0s;
 }
 .contact-book__item:hover {
@@ -60,5 +60,5 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #fff;
+    color: #fff !important;
 }

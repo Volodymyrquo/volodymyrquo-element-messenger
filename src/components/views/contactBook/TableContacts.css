@@ -22,8 +22,11 @@
     margin-top: 20px;
     min-width: 950px;
     white-space: nowrap;
+    width: 100%;
 }
+
 .contact-book__list-alph {
+    display: flex;
     position: absolute;
     z-index: 10000;
     list-style-type: none;
@@ -37,6 +40,8 @@
         ),
         #fff;
     box-shadow: 0px 5px 15px rgba(88, 86, 104, 0.12);
+    flex-direction: column;
+    text-align: center;
 }
 .contact-book__item-alph {
     display: flex;
