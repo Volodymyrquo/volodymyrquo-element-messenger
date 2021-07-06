@@ -1,38 +1,40 @@
-import React, { FC, useState } from 'react';
-import { Link, useRouteMatch } from "react-router-dom";
+import React, { FC, useState, useContext } from 'react';
 import './NavigationSidebar.css';
 import classNames from 'classnames';
+import { Context } from "../../../context/context";
 
 const NavigationSidebar: FC = () => {
-    const { url } = useRouteMatch();
     const [allContactsBtn, setAllContactsBtn] = useState(true);
     const [myFavouritesBtn, setMyFavouritesBtn] = useState(false);
     const [recentlyAddedBtn, setRecentlyAddedBtn] = useState(false);
     const [referredContactBook, setReferredContactBook] = useState(false);
+    const { setPage } = useContext(Context);
 
     return (
         <ul className="metismenu list-unstyled" id="side-menu">
-            <li>
-                <Link
-                    to={`${url}/all_contacts`}
+            <li
+
+            ><a href="/#/contact_book"
                     className={classNames("contact-book__item", {
-            "contact-book__item-active": allContactsBtn,
+                "contact-book__item-active": allContactsBtn,
                     })}
                     onClick={() => {
                         setAllContactsBtn(true);
                         setMyFavouritesBtn(false);
                         setRecentlyAddedBtn(false);
                         setReferredContactBook(false);
+                        setPage("allContacts");
                     }}
                 >
                     <i className="icon-User" />
                     <span>All contacts</span>
-                </Link>
+                </a>
+
             </li>
 
             <li>
-                <Link
-                    to={`${url}/my_favourites`}
+                <a
+                    href="/#/contact_book"
                     className={classNames("contact-book__item", {
             "contact-book__item-active": myFavouritesBtn,
                     })}
@@ -41,16 +43,17 @@ const NavigationSidebar: FC = () => {
                         setMyFavouritesBtn(true);
                         setRecentlyAddedBtn(false);
                         setReferredContactBook(false);
+                        setPage("myFavourites");
                     }}
                 >
                     <i className="icon-Star" />
                     <span>My favourites</span>
-                </Link>
+                </a>
             </li>
 
             <li>
-                <Link
-                    to={`${url}/recently_added`}
+                <a
+                    href="/#/contact_book"
                     className={classNames("contact-book__item", {
             "contact-book__item-active": recentlyAddedBtn,
                     })}
@@ -59,16 +62,17 @@ const NavigationSidebar: FC = () => {
                         setMyFavouritesBtn(false);
                         setRecentlyAddedBtn(true);
                         setReferredContactBook(false);
+                        setPage("recentlyAdded");
                     }}
                 >
                     <i className="icon-Alarm" />
                     <span>Recently added</span>
                     <span className="contact-book__unread">25</span>
-                </Link>
+                </a>
             </li>
             <li>
-                <Link
-                    to={`${url}/referred_contact_book`}
+                <a
+                    href="/#/contact_book"
                     className={classNames("contact-book__item", {
             "contact-book__item-active": referredContactBook,
                     })}
@@ -77,12 +81,13 @@ const NavigationSidebar: FC = () => {
                         setMyFavouritesBtn(false);
                         setRecentlyAddedBtn(false);
                         setReferredContactBook(true);
+                        setPage("referred");
                     }}
                 >
                     <i className="icon-Cube" />
                     <span>Referred</span>
                     <span className="contact-book__unread">12</span>
-                </Link>
+                </a>
             </li>
         </ul>
     );

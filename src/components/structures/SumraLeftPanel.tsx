@@ -466,7 +466,7 @@ export default class SumraLeftPanel extends React.Component<IProps, IState> {
                 <aside className="mx_LeftPanel_roomListContainer">
                     {this.renderHeader()}
                     {this.renderSearchExplore()}
-                    <div className="sumra-contact-book-link"><Link to="/contact_book">Contact book</Link></div> 
+                    <div className="sumra-contact-book-link"><Link to="/contact_book">Contact book</Link></div>
 
                     {this.renderBreadcrumbs()}
 

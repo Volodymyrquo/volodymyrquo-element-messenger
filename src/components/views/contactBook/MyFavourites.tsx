@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 
+
 const MyFavourites: FC = () => {
     return (
         <section className="contact-book__main-content" style={{ backgroundColor: "#fafafc" }}>

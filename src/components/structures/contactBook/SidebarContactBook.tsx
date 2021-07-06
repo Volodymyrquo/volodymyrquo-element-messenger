@@ -1,13 +1,10 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useContext } from 'react';
 import logo from "../../../../res/images/contactBook/logo.svg";
 import NavigationSidebar from './NavigationSidebar';
-import { Link, useRouteMatch } from "react-router-dom";
 import plus from "../../../../res/images/contactBook/plus.svg";
 
 const SidebarContactBook: FC = () => {
     const [burger, setBurger] = useState(true);
-    const match = useRouteMatch();
-    console.log(match);
     return (
         <section
             className={burger ?"contact-book__sidebar-block" : "contact-book__sidebar-block-visible"}
@@ -37,21 +34,21 @@ const SidebarContactBook: FC = () => {
 
             <h3 className="contact-book__title-sidebar">Groups</h3>
 
-            <Link to="" className="contact-book__add-new-group">
+            <a href="" className="contact-book__add-new-group">
                 <img
                     src={plus}
                     alt="plus"
                 />
                 <span>add new group</span>
-            </Link>
+            </a>
 
-            <Link
-                to={{ pathname: "/contactBook/all_contacts", search: '?import-contacts=true' }}
+            <a
+                href={{ pathname: "/contactBook/all_contacts", search: '?import-contacts=true' }}
                 className="contact-book__btn-import"
             >
                 <i className="icon-Swap" />
                 <span>Import</span>
-            </Link>
+            </a>
 
             <button className="contact-book__btn-import">
                 <i className="icon-Download" />
@@ -63,12 +60,12 @@ const SidebarContactBook: FC = () => {
           Get up to $250 for Referrals.<br />
           Earn Unlimited.
                 </p>
-                <Link
-                    to="/referrals"
+                <a
+                    href="/referrals"
                     className="contact-book__more-btn"
                 >
           Learn more
-                </Link>
+                </a>
             </div>
         </section>
     );
