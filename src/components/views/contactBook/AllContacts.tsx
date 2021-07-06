@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
-import notification from '../../../../res/images/contactBook/notification.svg';
-import ann from '../../../../res/images/contactBook/ann.svg';
-import search from '../../../../res/images/contactBook/search.svg';
-import { Link } from 'react-router-dom';
-import "./AllContacts.css"
+import notification from "../../../../res/images/contactBook/notification.svg";
+import ann from "../../../../res/images/contactBook/ann.svg";
+import search from "../../../../res/images/contactBook/search.svg";
+import "./AllContacts.css";
+import TableContacts from './TableContacts';
 
 const AllContacts: FC = () => {
     return (
@@ -56,18 +56,19 @@ const AllContacts: FC = () => {
                     </div>
                 </div>
                 <div className="contact-book__btn-inner">
-                    <Link to="/contactBook/contact_cash" className="contact-book__btn">
+                    <a href="/contactBook/contact_cash" className="contact-book__btn">
                         <span>ContactBook cash</span>
                         <i className="icon-money" />
-                    </Link>
-                    <Link to="#">
+                    </a>
+                    <a href="#">
                         <button className="contact-book__btn">
                             <span>Send referrals</span>
                             <i className="icon-User" />
                         </button>
-                    </Link>
+                    </a>
                 </div>
             </section>
+            <TableContacts />
         </section>
     );
 };

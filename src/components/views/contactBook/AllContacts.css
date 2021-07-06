@@ -1,3 +1,10 @@
+@font-face {
+    font-family: "DM Sans";
+    src: url("../../../../res/fonts/DMSans-Medium.ttf");
+    src: url("../../../../res/fonts/DMSans-Regular.ttf");
+    src: url("../../../../res/fonts/DMSans-Bold.ttf");
+}
+
 .contact-book {
     min-width: 320px;
 }

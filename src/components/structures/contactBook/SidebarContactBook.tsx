@@ -1,4 +1,4 @@
-import React, { FC, useState, useContext } from 'react';
+import React, { FC, useState} from 'react';
 import logo from "../../../../res/images/contactBook/logo.svg";
 import NavigationSidebar from './NavigationSidebar';
 import plus from "../../../../res/images/contactBook/plus.svg";
