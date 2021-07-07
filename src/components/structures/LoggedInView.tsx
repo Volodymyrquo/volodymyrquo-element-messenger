@@ -53,6 +53,7 @@ import { MatrixCall } from 'matrix-js-sdk/src/webrtc/call';
 import AudioFeedArrayForCall from 'matrix-react-sdk/src/components/views/voip/AudioFeedArrayForCall';
 import { HashRouter as Router, Route } from "react-router-dom";
 import ContactBook from "./contactBook/ContactBook";
+import {Provider} from "../../context/context"
 
 // We need to fetch each pinned message individually (if we don't already have it)
 // so each pinned message may trigger a request. Limit the number per room for sanity.
@@ -649,7 +650,9 @@ class LoggedInView extends React.Component<IProps, IState> {
                         <HostSignupContainer />
                         {audioFeedArraysForCalls}
                     </MatrixClientContext.Provider>
+                    <Provider>
                     <Route path="/contact_book" component={ContactBook} />
+                    </Provider>
 
                 </Router>
             </>

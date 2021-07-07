@@ -9,7 +9,7 @@ const NavigationSidebar: FC = () => {
     const [recentlyAddedBtn, setRecentlyAddedBtn] = useState(false);
     const [referredContactBook, setReferredContactBook] = useState(false);
     const { setPage } = useContext(Context);
-
+debugger
     return (
         <ul className="metismenu list-unstyled" id="side-menu">
             <li
