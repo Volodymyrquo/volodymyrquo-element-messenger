@@ -1,25 +1,32 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useContext, useEffect } from 'react';
 import { Table } from 'reactstrap';
 import './TableContacts.css';
 import { people } from '../../../../res/helpers/people';
 import arrowDown from '../../../../res/images/contactBook/arrowDown.svg';
+import { ContactBookContext } from "../../../context/ContactBook/contextContactBook";
 
 const alph = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
  'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 
 //@ts-ignore
 const TableContacts: FC = () => {
+    const { state, actions }= useContext(ContactBookContext);
+
     const [currentPage, setCurrentPage] = useState(1);
     const [showUsers, setShowUsers] = useState(10);
     const [sortUsers, setSortUsers] = useState(people
         .sort((a, b) => a.name > b.name ? 1 : -1));
     const [face, setFace] = useState(false);
-    /*     useEffect(() => {
-        dispatch(actions.getAllUsers(people));
+    const friends = state.searchPeople;
+    const text = state.searchText;
+    const reverse = state.reverse;
+
+    useEffect(() => {
+        actions.getAllUsers(people);
     }, []);
 
     useEffect(() => {
-        dispatch(actions.getAllUsers(people));
+        actions.getAllUsers(people);
         const letter = [];
         const result = [];
         for (let i = 0; friends.length > i; i++) {
@@ -30,9 +37,9 @@ const TableContacts: FC = () => {
             result.push(friends[i]);
         }
         setSortUsers(result);
-    }, [text, reverse]); */
+    }, [text, reverse]);
 
-    /* useEffect(() => {
+    useEffect(() => {
         if (friends.length > 0) {
             const letter = [];
             const result = [];
@@ -46,7 +53,7 @@ const TableContacts: FC = () => {
             }
             setSortUsers(result);
         } else {
-            dispatch(actions.getAllUsers(people));
+            actions.getAllUsers(people);
             const letter = [];
             const result = [];
             for (let i = 0; sortUsers.length > i; i++) {
@@ -57,9 +64,9 @@ const TableContacts: FC = () => {
                 result.push(sortUsers[i]);
             }
             setSortUsers(result);
-            dispatch(actions.getSearchPeople(result));
+            actions.getSearchPeople(result);
         }
-    }, []); */
+    }, []);
 
     const indexOfLastUsers = currentPage * showUsers;
     const indexOfFirstUsers = indexOfLastUsers - showUsers;

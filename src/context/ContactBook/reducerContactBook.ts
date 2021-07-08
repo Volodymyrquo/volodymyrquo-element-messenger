@@ -8,7 +8,7 @@ import {
     DOWNLOAD_SMS,
 } from './actionTypes';
 
-const initialState: ContactBookState = {
+export const initialState: ContactBookState = {
   users: [],
   searchPeople: [],
   searchText: '',

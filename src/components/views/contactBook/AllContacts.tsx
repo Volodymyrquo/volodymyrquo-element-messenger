@@ -1,11 +1,35 @@
-import React, { FC } from 'react';
+import React, { FC, useState, useContext } from 'react';
 import notification from "../../../../res/images/contactBook/notification.svg";
 import ann from "../../../../res/images/contactBook/ann.svg";
 import search from "../../../../res/images/contactBook/search.svg";
 import "./AllContacts.css";
 import TableContacts from './TableContacts';
+import { ContactBookContext } from "../../../context/ContactBook/contextContactBook";
+import { people } from '../../../../res/helpers/people';
 
-const AllContacts: FC = () => {
+const AllContacts: FC = () => {debugger
+    const { actions } = useContext(ContactBookContext);
+    const [textValue, setTextValue] = useState('');
+    const [defaultSelect, setDefaultSelect] = useState("A-Z");
+
+    const findUser = ({ target: { value } }) => {
+        setTextValue(value);
+        actions.getSearchText(value);
+        actions.getSearchPeople(value);
+    };
+
+    const handleInputChange = ({ target: { value } }) => {
+        setDefaultSelect(value);
+        if ("A-Z" === value) {
+            actions.performUnfolding(false);
+            actions.getAllUsers(people);
+        }
+
+        if ("Z-A" === value) {
+            actions.performUnfolding(true);
+            actions.getAllUsers(people);
+        }
+    };
     return (
         <section className="contact-book__main-content">
             <section className="contact-book__header-contacts">
@@ -24,7 +48,8 @@ const AllContacts: FC = () => {
                     <div className="contact-book__for-select">
                         <select
                             className="contact-book__sort-alphabet"
-
+                            value={defaultSelect}
+                            onChange={handleInputChange}
                         >
                             <option
                                 value="A-Z"
@@ -46,6 +71,8 @@ const AllContacts: FC = () => {
                             className="contact-book__find-cash"
                             placeholder="Search"
                             type="text"
+                            value={textValue}
+                            onChange={findUser}
 
                         />
                         <img
