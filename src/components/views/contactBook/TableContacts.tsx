@@ -20,7 +20,7 @@ const TableContacts: FC = () => {
     const friends = state.searchPeople;
     const text = state.searchText;
     const reverse = state.reverse;
-
+/* 
     useEffect(() => {
         actions.getAllUsers(people);
     }, []);
@@ -66,7 +66,7 @@ const TableContacts: FC = () => {
             setSortUsers(result);
             actions.getSearchPeople(result);
         }
-    }, []);
+    }, []); */
 
     const indexOfLastUsers = currentPage * showUsers;
     const indexOfFirstUsers = indexOfLastUsers - showUsers;
