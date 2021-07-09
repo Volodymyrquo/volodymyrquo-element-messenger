@@ -7,7 +7,7 @@ import TableContacts from './TableContacts';
 import { ContactBookContext } from "../../../context/ContactBook/contextContactBook";
 import { people } from '../../../../res/helpers/people';
 
-const AllContacts: FC = () => {debugger
+const AllContacts: FC = () => {
     const { actions } = useContext(ContactBookContext);
     const [textValue, setTextValue] = useState('');
     const [defaultSelect, setDefaultSelect] = useState("A-Z");

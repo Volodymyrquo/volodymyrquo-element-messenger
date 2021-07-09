@@ -20,7 +20,7 @@ const TableContacts: FC = () => {
     const friends = state.searchPeople;
     const text = state.searchText;
     const reverse = state.reverse;
-/* 
+
     useEffect(() => {
         actions.getAllUsers(people);
     }, []);
@@ -66,7 +66,7 @@ const TableContacts: FC = () => {
             setSortUsers(result);
             actions.getSearchPeople(result);
         }
-    }, []); */
+    }, []);
 
     const indexOfLastUsers = currentPage * showUsers;
     const indexOfFirstUsers = indexOfLastUsers - showUsers;
@@ -150,8 +150,8 @@ const TableContacts: FC = () => {
                         >
                             <tr className="contact-book__list-alph">
                                 {alph.map((letter) => (
-                                    <a
-                                        href={`#${letter}`}
+                                    <td
+                                       
                                         /*                                         className={friends.some(man => man.name[0] === letter) ? "contact-book__item-alph-true" : "contact-book__item-alph"}
  */ key={letter}
                                         onClick={()=>{
@@ -160,7 +160,7 @@ const TableContacts: FC = () => {
                                         }}
                                     >
                                         {letter}
-                                    </a>
+                                    </td>
                                 ))}
                             </tr>
                             {currentUsers.map(person => (
