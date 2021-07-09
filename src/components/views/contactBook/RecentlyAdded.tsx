@@ -83,8 +83,12 @@ const RecentlyAdded: FC = () => {
                     </div>
                 </div>
                 <div className="contact-book__btn-inner">
-                    <span>ContactBook cash</span>
+<button className="contact-book__btn" >
+<span>ContactBook cash</span>
                     <i className="icon-money" />
+
+</button>
+
                     <button className="contact-book__btn">
                         <span>Send referrals</span>
                         <i className="icon-User" />

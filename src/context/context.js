@@ -2,7 +2,7 @@ import React, { useReducer, createContext } from "react";
 import contextReducer from "./contextReducer";
 import AllContacts from "../components/views/contactBook/AllContacts";
 import MyFavourites from "../components/views/contactBook/MyFavourites";
-import Referred from "../components/views/contactBook/Referred";
+import Referred from "../components/views/contactBook/RefferedContactBook/ReferredContactBook";
 import RecentlyAdded from "../components/views/contactBook/RecentlyAdded";
 import { initialState } from "./contextReducer";
 

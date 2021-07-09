@@ -1,12 +1,12 @@
 import React, { FC, useState, useContext } from 'react';
-import notification from "../../../../res/images/contactBook/notification.svg";
-import ann from "../../../../res/images/contactBook/ann.svg";
-import search from "../../../../res/images/contactBook/search.svg";
-import TableContacts from './TableContacts';
-import { ContactBookContext } from "../../../context/ContactBook/contextContactBook";
-import { people } from '../../../../res/helpers/people';
+import notification from '../../../../../res/images/contactBook/notification.svg';
+import ann from '../../../../../res/images/contactBook/ann.svg';
+import search from '../../../../../res/images/contactBook/search.svg';
+import TableReferred from './TableReferred';
+import { people } from '../../../../../res/helpers/people';
+import { ContactBookContext } from "../../../../context/ContactBook/contextContactBook";
 
-const AllContacts: FC = () => {
+const ReferredContactBook: FC = () => {
     const { actions } = useContext(ContactBookContext);
     const [textValue, setTextValue] = useState('');
     const [defaultSelect, setDefaultSelect] = useState("A-Z");
@@ -33,8 +33,8 @@ const AllContacts: FC = () => {
         <section className="contact-book__main-content">
             <section className="contact-book__header-contacts">
                 <div className="contact-book__title-inner">
-                    <h2 className="contact-book__title-all-contacts">All contacts</h2>
-                    <span className="contact-book__number-of-contacts">10</span>
+                    <h2 className="contact-book__title-all-contacts">Referred</h2>
+                    <span className="contact-book__number-of-contacts">{people.length}</span>
                 </div>
                 <div className="contact-book__inner-person">
                     <img src={notification} alt="" className="contact-book__notification-img" />
@@ -53,12 +53,12 @@ const AllContacts: FC = () => {
                             <option
                                 value="A-Z"
                             >
-                Sort by: A-Z
+              Sort by: A-Z
                             </option>
                             <option
                                 value="Z-A"
                             >
-                Sort by: Z-A
+              Sort by: Z-A
                             </option>
                         </select>
                         <select className="contact-book__groups">
@@ -72,7 +72,6 @@ const AllContacts: FC = () => {
                             type="text"
                             value={textValue}
                             onChange={findUser}
-
                         />
                         <img
                             className="contact-book__img-search"
@@ -82,20 +81,19 @@ const AllContacts: FC = () => {
                     </div>
                 </div>
                 <div className="contact-book__btn-inner">
-                    <a href="/contactBook/contact_cash" className="contact-book__btn">
-                        <span>ContactBook cash</span>
-                        <i className="icon-money" />
-                    </a>
-                    <a href="#">
-                        <button className="contact-book__btn">
-                            <span>Send referrals</span>
-                            <i className="icon-User" />
-                        </button>
-                    </a>
+                  <button className="contact-book__btn">
+                  <span>ContactBook cash</span>
+                    <i className="icon-money" />
+
+                  </button>
+                    <button disabled={true} className="contact-book__btn">
+                        <span>Send referrals</span>
+                        <i className="icon-User" />
+                    </button>
                 </div>
             </section>
-            <TableContacts />
+            <TableReferred />
         </section>
     );
 };
-export default AllContacts;
+export default ReferredContactBook;

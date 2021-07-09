@@ -1,25 +1,33 @@
-import React, { FC, useState, useContext, useEffect } from 'react';
+import React, { FC, useEffect, useState, useContext } from 'react';
 import { Table } from 'reactstrap';
-import { people } from '../../../../res/helpers/people';
-import arrowDown from '../../../../res/images/contactBook/arrowDown.svg';
-import { ContactBookContext } from "../../../context/ContactBook/contextContactBook";
-
-const alph = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
- 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+import { people } from '../../../../../res/helpers/people';
+import arrowDown from '../../../../../res/images/contactBook/arrowDown.svg';
+import facebook from '../../../../../res/images/contactBook/facebook.svg';
+import instagram from '../../../../../res/images/contactBook/instagram.svg';
+import linkedin from '../../../../../res/images/contactBook/in.svg';
+import twitter from '../../../../../res/images/contactBook/twitter.svg';
+import pinterest from '../../../../../res/images/contactBook/pinterest.svg';
+import discord from '../../../../../res/images/contactBook/discord.svg';
+import youtube from '../../../../../res/images/contactBook/youtube.svg';
+import zoom from '../../../../../res/images/contactBook/zoom.svg';
+import tiktok from '../../../../../res/images/contactBook/tiktok.svg';
+import twinch from '../../../../../res/images/contactBook/twinch.svg';
+import { ContactBookContext } from "../../../../context/ContactBook/contextContactBook";
+const icons = [facebook, instagram, linkedin, twitter, pinterest, discord, youtube, zoom, tiktok, twinch];
 
 //@ts-ignore
-const TableContacts: FC = () => {
-    const { state, actions }= useContext(ContactBookContext);
+const TableReferred: FC = () => {
+    const { actions, state } = useContext(ContactBookContext);
 
     const [currentPage, setCurrentPage] = useState(1);
     const [showUsers, setShowUsers] = useState(10);
     const [sortUsers, setSortUsers] = useState(people
         .sort((a, b) => a.name > b.name ? 1 : -1));
     const [face, setFace] = useState(false);
+
     const friends = state.searchPeople;
     const text = state.searchText;
     const reverse = state.reverse;
-
     useEffect(() => {
         actions.getAllUsers(people);
     }, []);
@@ -139,29 +147,13 @@ const TableContacts: FC = () => {
                                 </th>
                                 <th className="contact-book__th contact-book__th-email">Email</th>
                                 <th className="contact-book__th contact-book__th-phone">Phone number</th>
-                                <th className="contact-book__th contact-book__th-social">Social media profile</th>
-                                <th className="contact-book__th contact-book__th-groups">Groups</th>
+                                <th className="contact-book__th contact-book__th-used-social">Used comunication platform</th>
                             </tr>
                         </thead>
                         <tbody style={{
                 background: "#FFFFFF",
                         }}
                         >
-                            <tr className="contact-book__list-alph">
-                                {alph.map((letter) => (
-                                    <td
-                                       
-                                        /*                                         className={friends.some(man => man.name[0] === letter) ? "contact-book__item-alph-true" : "contact-book__item-alph"}
- */ key={letter}
-                                        onClick={()=>{
-                                            //@ts-ignore
-                                            openTheWholeList(letter);
-                                        }}
-                                    >
-                                        {letter}
-                                    </td>
-                                ))}
-                            </tr>
                             {currentUsers.map(person => (
                                 //@ts-ignore
                                 (Object.keys(person).length === 1) ? (
@@ -173,10 +165,9 @@ const TableContacts: FC = () => {
                                                 type="checkbox"
                                                 onChange={selectAllFriends}
                                             />
-                                            <label className="contact-book__td-checkbox" htmlFor={person.letter}></label>
+                                            <label className="contact-book__td-checkbox"  htmlFor={person.letter}></label>
                                             <span className="contact-book__td-text">{person.letter}</span>
                                         </td>
-                                        <td></td>
                                         <td></td>
                                         <td></td>
                                         <td></td>
@@ -204,15 +195,11 @@ const TableContacts: FC = () => {
                                             />
                                             {person.phonNumber}
                                         </td>
-                                        <td className="contact-book__th">{person.social.map(s => (
+                                        <td className="contact-book__th">{icons.map(s => (
                                             <a
                                                 key={s}
                                                 //@ts-ignore
-                                                href={social.filter(el => {
-                                                    const arr = s.split('/').join('.').split('.');
-                                                    const result = arr[arr.length - 2];
-                                                    return el.includes(result.toLowerCase());
-                                                })}
+                                                href={icons.map(el => el)}
                                             >
                                                 <img
                                                     className="contact-book__social-img"
@@ -221,7 +208,6 @@ const TableContacts: FC = () => {
                                                 />
                                             </a>
                                         ))}</td>
-                                        <td className="contact-book__th"><span className="contact-book__group">{person.group}</span></td>
                                     </tr>
                                 )))}
                         </tbody>
@@ -249,4 +235,5 @@ const TableContacts: FC = () => {
         </>
     );
 };
-export default TableContacts;
+
+export default TableReferred;
