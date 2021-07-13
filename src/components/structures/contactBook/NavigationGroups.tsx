@@ -2,15 +2,17 @@ import React, { FC, useState, useContext } from 'react';
 import classNames from 'classnames';
 import { Context } from "../../../context/context";
 
-const NavigationSidebar: FC = () => {
+const NavigationGroups: FC = ({isOpen}) => {
     const [allContactsBtn, setAllContactsBtn] = useState(true);
     const [myFavouritesBtn, setMyFavouritesBtn] = useState(false);
     const [recentlyAddedBtn, setRecentlyAddedBtn] = useState(false);
     const [referredContactBook, setReferredContactBook] = useState(false);
     const { setPage } = useContext(Context);
 
+
     return (
-        <ul className="metismenu list-unstyled" id="side-menu">
+
+        <ul className={isOpen ?"metismenu list-unstyled": "display-none" } id="side-menu" >
             <li
 
             ><a href="/#/contact_book"
@@ -26,7 +28,7 @@ const NavigationSidebar: FC = () => {
                     }}
                 >
                     <i className="icon-User" />
-                    <span>All contacts</span>
+                    <span>family</span>
                 </a>
 
             </li>
@@ -46,7 +48,7 @@ const NavigationSidebar: FC = () => {
                     }}
                 >
                     <i className="icon-Star" />
-                    <span>My favourites</span>
+                    <span>my trust circle</span>
                 </a>
             </li>
 
@@ -65,7 +67,7 @@ const NavigationSidebar: FC = () => {
                     }}
                 >
                     <i className="icon-Alarm" />
-                    <span>Recently added</span>
+                    <span>friends</span>
                     <span className="contact-book__unread">25</span>
                 </a>
             </li>
@@ -84,11 +86,12 @@ const NavigationSidebar: FC = () => {
                     }}
                 >
                     <i className="icon-Cube" />
-                    <span>Referred</span>
+                    <span>collegues</span>
                     <span className="contact-book__unread">12</span>
                 </a>
             </li>
         </ul>
-    );
+   
+   );
 };
-export default NavigationSidebar;
+export default NavigationGroups;

@@ -8,6 +8,7 @@ const alph = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
  'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 
 //@ts-ignore
+
 const TableContacts: FC = () => {
     const { state, actions }= useContext(ContactBookContext);
 
@@ -16,10 +17,10 @@ const TableContacts: FC = () => {
     const [sortUsers, setSortUsers] = useState(people
         .sort((a, b) => a.name > b.name ? 1 : -1));
     const [face, setFace] = useState(false);
-    const friends = state.searchPeople;
+
     const text = state.searchText;
     const reverse = state.reverse;
-
+    const friends = state.searchPeople;
     useEffect(() => {
         actions.getAllUsers(people);
     }, []);
@@ -36,7 +37,7 @@ const TableContacts: FC = () => {
             result.push(friends[i]);
         }
         setSortUsers(result);
-    }, [text, reverse]);
+    }, [text, reverse,]);
 
     useEffect(() => {
         if (friends.length > 0) {
@@ -80,7 +81,7 @@ const TableContacts: FC = () => {
     };
 
     const selectAllFriends = ({ target }) => {
-        console.log(target);
+        console.log("#####" + target.checked);
         currentUsers.forEach(people => {
             setFace(!face);
 
@@ -150,7 +151,7 @@ const TableContacts: FC = () => {
                             <tr className="contact-book__list-alph">
                                 {alph.map((letter) => (
                                     <td
-                                       
+
                                         /*                                         className={friends.some(man => man.name[0] === letter) ? "contact-book__item-alph-true" : "contact-book__item-alph"}
  */ key={letter}
                                         onClick={()=>{
@@ -166,14 +167,16 @@ const TableContacts: FC = () => {
                                 //@ts-ignore
                                 (Object.keys(person).length === 1) ? (
                                     <tr key={person.letter} className="contact-book__tr-alphabet">
-                                        <td>
+                                        <td >
                                             <input
                                                 className="contact-book__input-checkbox"
                                                 id={person.letter}
                                                 type="checkbox"
                                                 onChange={selectAllFriends}
                                             />
+
                                             <label className="contact-book__td-checkbox" htmlFor={person.letter}></label>
+
                                             <span className="contact-book__td-text">{person.letter}</span>
                                         </td>
                                         <td></td>

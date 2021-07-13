@@ -29,6 +29,7 @@ const AllContacts: FC = () => {
             actions.getAllUsers(people);
         }
     };
+
     return (
         <section className="contact-book__main-content">
             <section className="contact-book__header-contacts">

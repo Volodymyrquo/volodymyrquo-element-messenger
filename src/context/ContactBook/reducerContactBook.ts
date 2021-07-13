@@ -22,10 +22,12 @@ const reducerContactBook = (state = initialState, action: ContactBookAction): Co
         case USERS_TYPE:
             return {
         ...state,
+        // eslint-disable-next-line max-len
         users: action.users.sort((a, b) => !state.reverse ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name)),
+        // eslint-disable-next-line max-len
         searchPeople: action.users.sort((a, b) => !state.reverse ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name)),
+     
             };
-
         case SEARCH_PEOPLE:
             return {
         ...state,

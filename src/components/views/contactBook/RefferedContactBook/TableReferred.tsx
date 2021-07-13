@@ -30,9 +30,9 @@ const TableReferred: FC = () => {
     const reverse = state.reverse;
     useEffect(() => {
         actions.getAllUsers(people);
-    }, []);
+    }, [friends]);
 
-    useEffect(() => {
+   useEffect(() => {
         actions.getAllUsers(people);
         const letter = [];
         const result = [];
@@ -44,9 +44,9 @@ const TableReferred: FC = () => {
             result.push(friends[i]);
         }
         setSortUsers(result);
-    }, [text, reverse]);
-
-    useEffect(() => {
+    }, [text, reverse, friends]);
+ 
+ useEffect(() => {
         if (friends.length > 0) {
             const letter = [];
             const result = [];
@@ -73,7 +73,7 @@ const TableReferred: FC = () => {
             setSortUsers(result);
             actions.getSearchPeople(result);
         }
-    }, []);
+    }, [friends]);
 
     const indexOfLastUsers = currentPage * showUsers;
     const indexOfFirstUsers = indexOfLastUsers - showUsers;

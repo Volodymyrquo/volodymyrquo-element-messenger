@@ -4,6 +4,8 @@ import AllContacts from "../components/views/contactBook/AllContacts";
 import MyFavourites from "../components/views/contactBook/MyFavourites";
 import Referred from "../components/views/contactBook/RefferedContactBook/ReferredContactBook";
 import RecentlyAdded from "../components/views/contactBook/RecentlyAdded";
+import ImportContactsModal from "../components/views/contactBook/ImportContactsModal/ImportContactsModal";
+import ImportLoaderModal from "../components/views/contactBook/ImportContactsModal/ImportLoaderModal";
 import { initialState } from "./contextReducer";
 
 export const Context = createContext(initialState);
@@ -22,6 +24,8 @@ export const Provider = ({ children }) => {
         allContacts: <AllContacts />,
         recentlyAdded: <RecentlyAdded />,
         referred: <Referred />,
+        importContacts: <ImportContactsModal />,
+        importLoader: <ImportLoaderModal />,
     };
     const page = pages[state.pageId];
     return (

@@ -36,14 +36,16 @@ export const ContactBookProvider = ({ children }) => {
                 type: REVERSE_TYPE,
                 reverse,
             }),
-        getLetter: (sendLetter) => ({
-            type: SEND_LETTER,
-            sendLetter,
-        }),
-        dovnloadSend: (download) => ({
-            type: DOWNLOAD_SMS,
-            download,
-        }),
+        getLetter: (sendLetter) =>
+            dispatch({
+                type: SEND_LETTER,
+                sendLetter,
+            }),
+        dovnloadSend: (download) =>
+            dispatch({
+                type: DOWNLOAD_SMS,
+                download,
+            }),
     };
 
     return (

@@ -1,11 +1,19 @@
-import React, { FC, useState} from 'react';
+import React, { FC, useState, useContext } from 'react';
 import logo from "../../../../res/images/contactBook/logo.svg";
 import NavigationSidebar from './NavigationSidebar';
 import plus from "../../../../res/images/contactBook/plus.svg";
-import "./SidebarContactBook.css"
+import "./SidebarContactBook.css";
+import { Context } from "../../../context/context";
+import NavigationGroups from './NavigationGroups';
 
 const SidebarContactBook: FC = () => {
     const [burger, setBurger] = useState(true);
+    const { setPage } = useContext(Context);
+    const [isOpenSubmenu, setIsOpenSubmenu] = useState(false);
+    const handleOnClick = () => {
+        setIsOpenSubmenu(!isOpenSubmenu);
+    };
+
     return (
         <section
             className={burger ?"contact-book__sidebar-block" : "contact-book__sidebar-block-visible"}
@@ -33,8 +41,8 @@ const SidebarContactBook: FC = () => {
             <h3 className="contact-book__title-sidebar">Contacts</h3>
             <NavigationSidebar />
 
-            <h3 className="contact-book__title-sidebar">Groups</h3>
-
+            <h3 className="contact-book__title-sidebar" onClick={handleOnClick}>Groups</h3>
+            <NavigationGroups isOpen={isOpenSubmenu} />
             <a href="" className="contact-book__add-new-group">
                 <img
                     src={plus}
@@ -44,7 +52,11 @@ const SidebarContactBook: FC = () => {
             </a>
 
             <a
-                href="#"
+                href="/#/contact_book"
+                onClick={() => {
+                    setPage("importContacts");
+                }}
+
                 className="contact-book__btn-import"
             >
                 <i className="icon-Swap" />
