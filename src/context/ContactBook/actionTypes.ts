@@ -4,3 +4,4 @@ export const SEARCH_TEXT = 'SEARCH_TEXT';
 export const REVERSE_TYPE = 'REVERSE_TYPE';
 export const SEND_LETTER = 'SEND_LETTER';
 export const DOWNLOAD_SMS = 'DOWNLOAD_SMS';
+export const SORT_USERS = 'SORT_USERS';

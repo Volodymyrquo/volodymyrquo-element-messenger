@@ -10,9 +10,7 @@ const SidebarContactBook: FC = () => {
     const [burger, setBurger] = useState(true);
     const { setPage } = useContext(Context);
     const [isOpenSubmenu, setIsOpenSubmenu] = useState(false);
-    const handleOnClick = () => {
-        setIsOpenSubmenu(!isOpenSubmenu);
-    };
+   
 
     return (
         <section
@@ -41,7 +39,7 @@ const SidebarContactBook: FC = () => {
             <h3 className="contact-book__title-sidebar">Contacts</h3>
             <NavigationSidebar />
 
-            <h3 className="contact-book__title-sidebar" onClick={handleOnClick}>Groups</h3>
+            <h3 className="contact-book__title-sidebar" >Groups</h3>
             <NavigationGroups isOpen={isOpenSubmenu} />
             <a href="" className="contact-book__add-new-group">
                 <img

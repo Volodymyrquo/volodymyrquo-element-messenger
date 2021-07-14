@@ -6,6 +6,7 @@ import Referred from "../components/views/contactBook/RefferedContactBook/Referr
 import RecentlyAdded from "../components/views/contactBook/RecentlyAdded";
 import ImportContactsModal from "../components/views/contactBook/ImportContactsModal/ImportContactsModal";
 import ImportLoaderModal from "../components/views/contactBook/ImportContactsModal/ImportLoaderModal";
+import ContactCash from "../components/views/contactBook/ContactCash";
 import { initialState } from "./contextReducer";
 
 export const Context = createContext(initialState);
@@ -26,6 +27,7 @@ export const Provider = ({ children }) => {
         referred: <Referred />,
         importContacts: <ImportContactsModal />,
         importLoader: <ImportLoaderModal />,
+        contactCash: <ContactCash />,
     };
     const page = pages[state.pageId];
     return (

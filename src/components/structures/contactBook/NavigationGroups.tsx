@@ -2,17 +2,22 @@ import React, { FC, useState, useContext } from 'react';
 import classNames from 'classnames';
 import { Context } from "../../../context/context";
 
-const NavigationGroups: FC = ({isOpen}) => {
+type PropsType = {
+    isOpen: boolean;
+}
+
+
+const NavigationGroups: FC<PropsType> = ({ isOpen }) => {
+    
     const [allContactsBtn, setAllContactsBtn] = useState(true);
     const [myFavouritesBtn, setMyFavouritesBtn] = useState(false);
     const [recentlyAddedBtn, setRecentlyAddedBtn] = useState(false);
     const [referredContactBook, setReferredContactBook] = useState(false);
     const { setPage } = useContext(Context);
 
-
     return (
 
-        <ul className={isOpen ?"metismenu list-unstyled": "display-none" } id="side-menu" >
+        <ul className="metismenu list-unstyled" id="side-menu" >
             <li
 
             ><a href="/#/contact_book"
@@ -28,7 +33,7 @@ const NavigationGroups: FC = ({isOpen}) => {
                     }}
                 >
                     <i className="icon-User" />
-                    <span>family</span>
+                    <span>my family</span>
                 </a>
 
             </li>
@@ -48,7 +53,7 @@ const NavigationGroups: FC = ({isOpen}) => {
                     }}
                 >
                     <i className="icon-Star" />
-                    <span>my trust circle</span>
+                    <span>my friends</span>
                 </a>
             </li>
 
@@ -67,8 +72,8 @@ const NavigationGroups: FC = ({isOpen}) => {
                     }}
                 >
                     <i className="icon-Alarm" />
-                    <span>friends</span>
-                    <span className="contact-book__unread">25</span>
+                    <span>my trust circle</span>
+                  
                 </a>
             </li>
             <li>
@@ -86,12 +91,12 @@ const NavigationGroups: FC = ({isOpen}) => {
                     }}
                 >
                     <i className="icon-Cube" />
-                    <span>collegues</span>
-                    <span className="contact-book__unread">12</span>
+                    <span>my colleagues</span>
+                   
                 </a>
             </li>
         </ul>
-   
-   );
+
+    );
 };
 export default NavigationGroups;

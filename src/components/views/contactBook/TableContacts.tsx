@@ -14,22 +14,26 @@ const TableContacts: FC = () => {
 
     const [currentPage, setCurrentPage] = useState(1);
     const [showUsers, setShowUsers] = useState(10);
-    const [sortUsers, setSortUsers] = useState(people
-        .sort((a, b) => a.name > b.name ? 1 : -1));
+    const [sortUsers, setSortUsers] = useState(people.sort((a, b) => a.name > b.name ? 1 : -1));
     const [face, setFace] = useState(false);
 
     const text = state.searchText;
     const reverse = state.reverse;
     const friends = state.searchPeople;
-    useEffect(() => {
-        actions.getAllUsers(people);
-    }, []);
+
+    useEffect(()=>{
+        console.log("### Test useEffect \"text\" " + text)
+        console.log("### Test useEffect \"reverse\" " + reverse)
+        for (let i = 0; i < friends.length; i++) {console.log("### Test useEffect " + friends[i].name);
+    }
+    }, [reverse]);
 
     useEffect(() => {
-        actions.getAllUsers(people);
         const letter = [];
         const result = [];
         for (let i = 0; friends.length > i; i++) {
+            console.log("### 2 useEffect " + friends[i].name);
+
             if (!letter.includes(friends[i].name[0])) {
                 letter.push(friends[i].name[0].toUpperCase());
                 result.push({ 'letter': friends[i].name[0].toUpperCase() });
@@ -37,14 +41,15 @@ const TableContacts: FC = () => {
             result.push(friends[i]);
         }
         setSortUsers(result);
-    }, [text, reverse,]);
+    }, [text, reverse]);
 
     useEffect(() => {
+
         if (friends.length > 0) {
             const letter = [];
             const result = [];
             for (let i = 0; friends.length > i; i++) {
-                console.log(friends[i].name);
+                console.log("### 3 useEffect " + friends[i].name);
                 if (!letter.includes(friends[i].name[0])) {
                     letter.push(friends[i].name[0].toUpperCase());
                     result.push({ 'letter': friends[i].name[0].toUpperCase() });
@@ -64,7 +69,6 @@ const TableContacts: FC = () => {
                 result.push(sortUsers[i]);
             }
             setSortUsers(result);
-            actions.getSearchPeople(result);
         }
     }, []);
 
@@ -81,7 +85,6 @@ const TableContacts: FC = () => {
     };
 
     const selectAllFriends = ({ target }) => {
-        console.log("#####" + target.checked);
         currentUsers.forEach(people => {
             setFace(!face);
 

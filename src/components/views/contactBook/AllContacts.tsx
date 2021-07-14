@@ -5,9 +5,11 @@ import search from "../../../../res/images/contactBook/search.svg";
 import TableContacts from './TableContacts';
 import { ContactBookContext } from "../../../context/ContactBook/contextContactBook";
 import { people } from '../../../../res/helpers/people';
+import { Context } from "../../../context/context";
 
 const AllContacts: FC = () => {
     const { actions } = useContext(ContactBookContext);
+    const { setPage } = useContext(Context);
     const [textValue, setTextValue] = useState('');
     const [defaultSelect, setDefaultSelect] = useState("A-Z");
 
@@ -21,12 +23,12 @@ const AllContacts: FC = () => {
         setDefaultSelect(value);
         if ("A-Z" === value) {
             actions.performUnfolding(false);
-            actions.getAllUsers(people);
+            actions.getSortUsers(people);
         }
 
         if ("Z-A" === value) {
             actions.performUnfolding(true);
-            actions.getAllUsers(people);
+            actions.getSortUsers(people);
         }
     };
 
@@ -83,7 +85,7 @@ const AllContacts: FC = () => {
                     </div>
                 </div>
                 <div className="contact-book__btn-inner">
-                    <a href="/contactBook/contact_cash" className="contact-book__btn">
+                    <a href="/#/contact_book" className="contact-book__btn" onClick={()=> setPage("contactCash")}>
                         <span>ContactBook cash</span>
                         <i className="icon-money" />
                     </a>
