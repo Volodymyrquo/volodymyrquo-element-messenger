@@ -16,7 +16,7 @@ import { ContactBookContext } from "../../../../context/ContactBook/contextConta
 const icons = [facebook, instagram, linkedin, twitter, pinterest, discord, youtube, zoom, tiktok, twinch];
 
 //@ts-ignore
-const TableReferred: FC = () => {
+const TableGroupsItem: FC = () => {
     const { actions, state } = useContext(ContactBookContext);
 
     const [currentPage, setCurrentPage] = useState(1);
@@ -230,4 +230,4 @@ const TableReferred: FC = () => {
     );
 };
 
-export default TableReferred;
+export default TableGroupsItem;

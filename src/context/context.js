@@ -3,6 +3,7 @@ import contextReducer from "./contextReducer";
 import AllContacts from "../components/views/contactBook/AllContacts";
 import MyFavourites from "../components/views/contactBook/MyFavourites";
 import Referred from "../components/views/contactBook/RefferedContactBook/ReferredContactBook";
+import GroupsItem from "../components/views/contactBook/Groups/GroupsItem";
 import RecentlyAdded from "../components/views/contactBook/RecentlyAdded";
 import ImportContactsModal from "../components/views/contactBook/ImportContactsModal/ImportContactsModal";
 import ImportLoaderModal from "../components/views/contactBook/ImportContactsModal/ImportLoaderModal";
@@ -20,6 +21,12 @@ export const Provider = ({ children }) => {
             payload: id,
         });
 
+    const setParams = (params) =>
+        dispatch({
+            type: "SET_PARAMS",
+            payload: params,
+        });
+
     const pages = {
         myFavourites: <MyFavourites />,
         allContacts: <AllContacts />,
@@ -28,10 +35,12 @@ export const Provider = ({ children }) => {
         importContacts: <ImportContactsModal />,
         importLoader: <ImportLoaderModal />,
         contactCash: <ContactCash />,
+        groupsItem: <GroupsItem />,
     };
     const page = pages[state.pageId];
+    const { params } = state;
     return (
-        <Context.Provider value={{ setPage, page }}>
+        <Context.Provider value={{ setPage, setParams, page, params }}>
             {children}
         </Context.Provider>
     );

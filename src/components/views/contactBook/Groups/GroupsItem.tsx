@@ -2,12 +2,14 @@ import React, { FC, useState, useContext } from 'react';
 import notification from '../../../../../res/images/contactBook/notification.svg';
 import ann from '../../../../../res/images/contactBook/ann.svg';
 import search from '../../../../../res/images/contactBook/search.svg';
-import TableReferred from './TableReferred';
+import TableGroupsItem from './TableGroupsItem';
 import { people } from '../../../../../res/helpers/people';
 import { ContactBookContext } from "../../../../context/ContactBook/contextContactBook";
+import { Context } from "../../../../context/context";
 
-const ReferredContactBook: FC = () => {
+const GroupsItem: FC = () => {
     const { actions } = useContext(ContactBookContext);
+    const {params} = useContext(Context)
     const [textValue, setTextValue] = useState('');
     const [defaultSelect, setDefaultSelect] = useState("A-Z");
     const { getSearchText, getSearchPeople, performUnfolding, getAllUsers } = actions;
@@ -34,7 +36,7 @@ const ReferredContactBook: FC = () => {
         <section className="contact-book__main-content">
             <section className="contact-book__header-contacts">
                 <div className="contact-book__title-inner">
-                    <h2 className="contact-book__title-all-contacts">Referred</h2>
+                    <h2 className="contact-book__title-all-contacts">{params.name}</h2>
                     <span className="contact-book__number-of-contacts">{people.length}</span>
                 </div>
                 <div className="contact-book__inner-person">
@@ -93,9 +95,10 @@ const ReferredContactBook: FC = () => {
                     </button>
                 </div>
             </section>
-            <TableReferred />
+            <TableGroupsItem />
         </section>
     );
 };
-export default ReferredContactBook;
+export default GroupsItem;
+
 
