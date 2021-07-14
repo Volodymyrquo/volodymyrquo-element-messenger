@@ -7,7 +7,7 @@ import { Context } from "../../../../context/context";
 
 const ImportContactsModal: FC<IProps> = ({ onClick }) => {
     const { actions } = useContext(ContactBookContext);
-    const {setPage} = useContext(Context)
+    const {setPage, setTable} = useContext(Context)
     let intervalId;
     let count = 0;
 
@@ -35,7 +35,8 @@ const ImportContactsModal: FC<IProps> = ({ onClick }) => {
                             src={Close}
                             alt="Close modal"
                             onClick={() => {
-                                setPage("allContacts")
+                                setTable("allContacts");
+                                setPage("contactBook")
                             }}
                         />
                     </div>

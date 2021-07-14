@@ -110,6 +110,92 @@ h6 {
     color: rgba(0, 0, 0, 0.5);
     font-weight: 600;
 }
+
+/* Styles for Contacts */
+.contact-book__main-content {
+    padding: 30px 30px 30px 270px;
+}
+@media (max-width: 1024px) {
+    .contact-book__main-content {
+        padding: 10px;
+    }
+}
+@media (max-width: 375px) {
+    .contact-book__main-content {
+        padding: 10px 10px 30px 10px;
+    }
+}
+#menuNone {
+    display: none;
+}
+@media (max-width: 1024px) {
+    #menuNone {
+        display: block;
+    }
+}
+#menuToggle {
+    overflow: hidden;
+    position: absolute;
+    top: 17px;
+    right: -47px;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #181a2b;
+    border-radius: 50%;
+}
+@media (max-width: 375px) {
+    #menuToggle {
+        right: -47px;
+        top: 18px;
+    }
+}
+#menuToggle input {
+    display: flex;
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    cursor: pointer;
+    opacity: 0;
+    /* hide input */
+    z-index: 2000000;
+    /* top of the menu */
+}
+#menuToggle span {
+    width: 25px;
+    height: 3px;
+    margin-bottom: 5px;
+    background: #dbd2d2;
+    border-radius: 4px;
+    -webkit-transition: all 0.5s cubic-bezier(0.08, 0.81, 0.87, 0.71);
+    -moz-transition: all 0.5s cubic-bezier(0.08, 0.81, 0.87, 0.71);
+    -ms-transition: all 0.5s cubic-bezier(0.08, 0.81, 0.87, 0.71);
+    -o-transition: all 0.5s cubic-bezier(0.08, 0.81, 0.87, 0.71);
+    transition: all 0.5s cubic-bezier(0.08, 0.81, 0.87, 0.71);
+}
+#span1 {
+    transform-origin: 4px 0px;
+}
+#span3 {
+    transform-origin: bottom right;
+}
+#menuToggle input:checked ~ #span1 {
+    background-color: #dbd2d2;
+    transform: rotate(45deg) translate(6px);
+}
+#menuToggle input:checked ~ #span2 {
+    background-color: #dbd2d2;
+    transform: rotate(495deg) translate(1px);
+}
+#menuToggle input:checked ~ #span3 {
+    background-color: #dbd2d2;
+    transform: rotate(45deg);
+    opacity: 0;
+}
+
 /* Styles for AllContacts */
 
 .contact-book {
@@ -143,6 +229,9 @@ h6 {
 @media (max-width: 1024px) {
     .contact-book__title-inner {
         padding-left: 50px;
+    }
+    .contact-book__main-content {
+        width: 100%;
     }
 }
 .contact-book__title-all-contacts {

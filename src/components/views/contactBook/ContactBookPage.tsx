@@ -8,7 +8,7 @@ import { Context } from "../../../context/context";
 
 const ContactBookPage: FC = () => {
     const { actions } = useContext(ContactBookContext);
-    const {table, params} = useContext(Context)
+    const {table, params, setBurger, burger} = useContext(Context)
     const [textValue, setTextValue] = useState('');
     const [defaultSelect, setDefaultSelect] = useState("A-Z");
     const { getSearchText, getSearchPeople, performUnfolding, getAllUsers } = actions;
@@ -34,6 +34,7 @@ const ContactBookPage: FC = () => {
     return (
         <section className="contact-book__main-content">
             <section className="contact-book__header-contacts">
+
                 <div className="contact-book__title-inner">
                     <h2 className="contact-book__title-all-contacts">{params.name}</h2>
                     <span className="contact-book__number-of-contacts">{people.length}</span>

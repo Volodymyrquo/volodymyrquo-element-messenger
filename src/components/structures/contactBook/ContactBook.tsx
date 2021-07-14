@@ -11,8 +11,9 @@ const ContactBook: FC = (props) => {
     return (
 
         <div className="sumra-contact-book-main ">
+             <ContactBookProvider>
             <SidebarContactBook />
-            <ContactBookProvider>
+           
                 {page}
             </ContactBookProvider>
 

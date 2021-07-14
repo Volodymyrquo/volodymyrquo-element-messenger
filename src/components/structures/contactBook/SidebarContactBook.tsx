@@ -7,14 +7,13 @@ import { Context } from "../../../context/context";
 import NavigationGroups from './NavigationGroups';
 
 const SidebarContactBook: FC = () => {
-    const [burger, setBurger] = useState(true);
-    const { setPage } = useContext(Context);
-    const [isOpenSubmenu, setIsOpenSubmenu] = useState(false);
+    const { setPage} = useContext(Context);
+    const [burger, setBurger] = useState(true)
    
 
     return (
         <section
-            className={burger ?"contact-book__sidebar-block" : "contact-book__sidebar-block-visible"}
+            className={ burger ? "contact-book__sidebar-block" : "contact-book__sidebar-block-visible"}
         >
             <div>
                 <img
@@ -22,7 +21,7 @@ const SidebarContactBook: FC = () => {
                     src={logo}
                     alt="logo on the page Contact Book"
                 />
-                <div
+                            <div
                     id="menuNone"
                     onClick={()=>{
                         setBurger(!burger);
@@ -34,13 +33,14 @@ const SidebarContactBook: FC = () => {
                         <span id="span2"></span>
                         <span id="span3"></span>
                     </div>
-                </div>
+                </div> 
+
             </div>
             <h3 className="contact-book__title-sidebar">Contacts</h3>
             <NavigationSidebar />
 
             <h3 className="contact-book__title-sidebar" >Groups</h3>
-            <NavigationGroups isOpen={isOpenSubmenu} />
+            <NavigationGroups />
             <a href="" className="contact-book__add-new-group">
                 <img
                     src={plus}

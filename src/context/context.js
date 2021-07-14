@@ -1,8 +1,8 @@
 import React, { useReducer, createContext } from "react";
 import contextReducer from "./contextReducer";
 import TableContacts from "../components/views/contactBook/TableContacts";
-import TableReferred from "../components/views/contactBook/RefferedContactBook/TableReferred";
-import GroupsItem from "../components/views/contactBook/Groups/GroupsItem";
+import TableReferred from "../components/views/contactBook/TableReferred";
+import TableGroupsItem from "../components/views/contactBook/TableGroupsItem";
 import ContactBookPage from "../components/views/contactBook/ContactBookPage";
 import ImportContactsModal from "../components/views/contactBook/ImportContactsModal/ImportContactsModal";
 import ImportLoaderModal from "../components/views/contactBook/ImportContactsModal/ImportLoaderModal";
@@ -30,26 +30,40 @@ export const Provider = ({ children }) => {
             type: "SET_PARAMS",
             payload: params,
         });
+    const setBurger = (burger) =>
+        dispatch({
+            type: "SET_BURGER",
+            payload: burger,
+        });
 
     const pages = {
         contactBook: <ContactBookPage />,
         importContacts: <ImportContactsModal />,
         importLoader: <ImportLoaderModal />,
         contactCash: <ContactCash />,
-        groupsItem: <GroupsItem />,
     };
     const tables = {
         myFavourites: <TableContacts />,
         allContacts: <TableContacts />,
         recentlyAdded: <TableContacts />,
         referred: <TableReferred />,
+        groupsItem: <TableGroupsItem />,
     };
     const table = tables[state.tableId];
     const page = pages[state.pageId];
-    const { params } = state;
+    const { params, burger } = state;
     return (
         <Context.Provider
-            value={{ setPage, setParams, setTable, page, params, table }}
+            value={{
+                setPage,
+                setParams,
+                setTable,
+                setBurger,
+                page,
+                params,
+                table,
+                burger,
+            }}
         >
             {children}
         </Context.Provider>

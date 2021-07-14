@@ -1,42 +1,38 @@
 import React, { FC, useState, useContext } from 'react';
 import classNames from 'classnames';
 import { Context } from "../../../context/context";
-import { mapDiff } from '../../../../../../matrix-react-sdk/src/utils/maps';
-import { inviteMultipleToRoom } from '../../../../../../matrix-react-sdk/src/RoomInvite';
 
-type PropsType = {
-    isOpen: boolean;
-};
+
 
 const groupsItems = [
     {
         name: "My family",
-        page: "groupsItem",
+        table: "groupsItem",
         activeClass: "allContactsBtn",
     },
     {
         name: "My friends",
-        page: "groupsItem",
+        table: "groupsItem",
         activeClass: "myFavouritesBtn",
     },
     {
         name: "My trust circle",
-        page: "groupsItem",
+        table: "groupsItem",
         activeClass: "recentlyAddedBtn",
     },
     {
         name: "My colleagues",
-        page: "groupsItem",
+        table: "groupsItem",
         activeClass: "referredContactBook",
     },
 ];
 
-const NavigationGroups: FC<PropsType> = ({ isOpen }) => {
+const NavigationGroups: FC = () => {
     const [allContactsBtn, setAllContactsBtn] = useState(true);
     const [myFavouritesBtn, setMyFavouritesBtn] = useState(false);
     const [recentlyAddedBtn, setRecentlyAddedBtn] = useState(false);
     const [referredContactBook, setReferredContactBook] = useState(false);
-    const { setPage, setParams } = useContext(Context);
+    const { setPage, setParams, setTable } = useContext(Context);
 
     return (
 
@@ -56,7 +52,8 @@ const NavigationGroups: FC<PropsType> = ({ isOpen }) => {
                         setMyFavouritesBtn(false);
                         setRecentlyAddedBtn(false);
                         setReferredContactBook(false);
- */ setPage(item.page);
+ */ setPage("contactBook");
+                            setTable(item.table);
                             setParams(params);
                         }}
                     >
