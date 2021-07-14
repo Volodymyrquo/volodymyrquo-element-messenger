@@ -12,23 +12,24 @@ const AllContacts: FC = () => {
     const { setPage } = useContext(Context);
     const [textValue, setTextValue] = useState('');
     const [defaultSelect, setDefaultSelect] = useState("A-Z");
+    const { getSearchText, getSearchPeople, performUnfolding, getAllUsers } = actions;
 
     const findUser = ({ target: { value } }) => {
         setTextValue(value);
-        actions.getSearchText(value);
-        actions.getSearchPeople(value);
+        getSearchText(value);
+        getSearchPeople(value);
     };
 
     const handleInputChange = ({ target: { value } }) => {
         setDefaultSelect(value);
         if ("A-Z" === value) {
-            actions.performUnfolding(false);
-            actions.getAllUsers(people);
+            performUnfolding(false);
+            getAllUsers(people);
         }
 
         if ("Z-A" === value) {
-            actions.performUnfolding(true);
-            actions.getAllUsers(people);
+            performUnfolding(true);
+            getAllUsers(people);
         }
     };
 
