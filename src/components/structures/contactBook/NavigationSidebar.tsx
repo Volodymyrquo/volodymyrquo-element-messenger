@@ -7,7 +7,7 @@ const NavigationSidebar: FC = () => {
     const [myFavouritesBtn, setMyFavouritesBtn] = useState(false);
     const [recentlyAddedBtn, setRecentlyAddedBtn] = useState(false);
     const [referredContactBook, setReferredContactBook] = useState(false);
-    const { setPage } = useContext(Context);
+    const { setPage, setTable, setParams } = useContext(Context);
 
     return (
         <ul className="metismenu list-unstyled" id="side-menu">
@@ -22,7 +22,9 @@ const NavigationSidebar: FC = () => {
                         setMyFavouritesBtn(false);
                         setRecentlyAddedBtn(false);
                         setReferredContactBook(false);
-                        setPage("allContacts");
+                        setPage("contactBook");
+                        setTable("allContacts");
+                        setParams({ name: "All contacts" });
                     }}
                 >
                     <i className="icon-User" />
@@ -42,7 +44,10 @@ const NavigationSidebar: FC = () => {
                         setMyFavouritesBtn(true);
                         setRecentlyAddedBtn(false);
                         setReferredContactBook(false);
-                        setPage("myFavourites");
+                        setTable("myFavourites");
+                        setPage("contactBook");
+                        setParams({ name: "My favourites" });
+
                     }}
                 >
                     <i className="icon-Star" />
@@ -61,7 +66,10 @@ const NavigationSidebar: FC = () => {
                         setMyFavouritesBtn(false);
                         setRecentlyAddedBtn(true);
                         setReferredContactBook(false);
-                        setPage("recentlyAdded");
+                        setTable("recentlyAdded");
+                        setPage("contactBook");
+                        setParams({ name: "Recently added" });
+
                     }}
                 >
                     <i className="icon-Alarm" />
@@ -80,7 +88,10 @@ const NavigationSidebar: FC = () => {
                         setMyFavouritesBtn(false);
                         setRecentlyAddedBtn(false);
                         setReferredContactBook(true);
-                        setPage("referred");
+                        setTable("referred");
+                        setPage("contactBook");
+                        setParams({ name: "Referred" });
+
                     }}
                 >
                     <i className="icon-Cube" />

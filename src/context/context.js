@@ -1,10 +1,9 @@
 import React, { useReducer, createContext } from "react";
 import contextReducer from "./contextReducer";
-import AllContacts from "../components/views/contactBook/AllContacts";
-import MyFavourites from "../components/views/contactBook/MyFavourites";
-import Referred from "../components/views/contactBook/RefferedContactBook/ReferredContactBook";
+import TableContacts from "../components/views/contactBook/TableContacts";
+import TableReferred from "../components/views/contactBook/RefferedContactBook/TableReferred";
 import GroupsItem from "../components/views/contactBook/Groups/GroupsItem";
-import RecentlyAdded from "../components/views/contactBook/RecentlyAdded";
+import ContactBookPage from "../components/views/contactBook/ContactBookPage";
 import ImportContactsModal from "../components/views/contactBook/ImportContactsModal/ImportContactsModal";
 import ImportLoaderModal from "../components/views/contactBook/ImportContactsModal/ImportLoaderModal";
 import ContactCash from "../components/views/contactBook/ContactCash";
@@ -20,6 +19,11 @@ export const Provider = ({ children }) => {
             type: "SET_PAGE",
             payload: id,
         });
+    const setTable = (id) =>
+        dispatch({
+            type: "SET_TABLE",
+            payload: id,
+        });
 
     const setParams = (params) =>
         dispatch({
@@ -28,19 +32,25 @@ export const Provider = ({ children }) => {
         });
 
     const pages = {
-        myFavourites: <MyFavourites />,
-        allContacts: <AllContacts />,
-        recentlyAdded: <RecentlyAdded />,
-        referred: <Referred />,
+        contactBook: <ContactBookPage />,
         importContacts: <ImportContactsModal />,
         importLoader: <ImportLoaderModal />,
         contactCash: <ContactCash />,
         groupsItem: <GroupsItem />,
     };
+    const tables = {
+        myFavourites: <TableContacts />,
+        allContacts: <TableContacts />,
+        recentlyAdded: <TableContacts />,
+        referred: <TableReferred />,
+    };
+    const table = tables[state.tableId];
     const page = pages[state.pageId];
     const { params } = state;
     return (
-        <Context.Provider value={{ setPage, setParams, page, params }}>
+        <Context.Provider
+            value={{ setPage, setParams, setTable, page, params, table }}
+        >
             {children}
         </Context.Provider>
     );
