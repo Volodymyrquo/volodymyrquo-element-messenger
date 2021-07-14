@@ -16,24 +16,13 @@ const TableContacts: FC = () => {
     const [showUsers, setShowUsers] = useState(10);
     const [sortUsers, setSortUsers] = useState(people.sort((a, b) => a.name > b.name ? 1 : -1));
     const [face, setFace] = useState(false);
-
-    const text = state.searchText;
-    const reverse = state.reverse;
-    const friends = state.searchPeople;
-
-    useEffect(()=>{
-        console.log("### Test useEffect \"text\" " + text)
-        console.log("### Test useEffect \"reverse\" " + reverse)
-        for (let i = 0; i < friends.length; i++) {console.log("### Test useEffect " + friends[i].name);
-    }
-    }, [reverse]);
+    const { searchText, reverse, searchPeople } = state;
+    const friends = searchPeople.sort((a, b) => !reverse ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name));
 
     useEffect(() => {
         const letter = [];
         const result = [];
         for (let i = 0; friends.length > i; i++) {
-            console.log("### 2 useEffect " + friends[i].name);
-
             if (!letter.includes(friends[i].name[0])) {
                 letter.push(friends[i].name[0].toUpperCase());
                 result.push({ 'letter': friends[i].name[0].toUpperCase() });
@@ -41,15 +30,13 @@ const TableContacts: FC = () => {
             result.push(friends[i]);
         }
         setSortUsers(result);
-    }, [text, reverse]);
+    }, [searchText, reverse]);
 
     useEffect(() => {
-
         if (friends.length > 0) {
             const letter = [];
             const result = [];
             for (let i = 0; friends.length > i; i++) {
-                console.log("### 3 useEffect " + friends[i].name);
                 if (!letter.includes(friends[i].name[0])) {
                     letter.push(friends[i].name[0].toUpperCase());
                     result.push({ 'letter': friends[i].name[0].toUpperCase() });

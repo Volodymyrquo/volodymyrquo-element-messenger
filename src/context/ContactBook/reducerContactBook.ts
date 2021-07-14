@@ -6,7 +6,6 @@ import {
     REVERSE_TYPE,
     SEND_LETTER,
     DOWNLOAD_SMS,
-    SORT_USERS,
 } from './actionTypes';
 
 export const initialState: ContactBookState = {
@@ -26,11 +25,7 @@ const reducerContactBook = (state = initialState, action: ContactBookAction): Co
         // eslint-disable-next-line max-len
         users: action.users.sort((a, b) => !state.reverse ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name)),
                 // eslint-disable-next-line max-len
-
-            };
-        case SORT_USERS:
-            return { ...state,
-    searchPeople: action.users.sort((a, b) => !state.reverse ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name)),
+                searchPeople: action.users
             };
         case SEARCH_PEOPLE:
             return {

@@ -21,12 +21,10 @@ const ReferredContactBook: FC = () => {
         setDefaultSelect(value);
         if ("A-Z" === value) {
             actions.performUnfolding(false);
-            actions.getAllUsers(people);
         }
 
         if ("Z-A" === value) {
             actions.performUnfolding(true);
-            actions.getAllUsers(people);
         }
     };
     return (

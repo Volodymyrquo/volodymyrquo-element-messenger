@@ -16,7 +16,7 @@ import { ContactBookContext } from "../../../../context/ContactBook/contextConta
 const icons = [facebook, instagram, linkedin, twitter, pinterest, discord, youtube, zoom, tiktok, twinch];
 
 //@ts-ignore
-const TableReferred: FC = () => {
+const TableReferred: FC = () => {debugger
     const { actions, state } = useContext(ContactBookContext);
 
     const [currentPage, setCurrentPage] = useState(1);
@@ -24,19 +24,15 @@ const TableReferred: FC = () => {
     const [sortUsers, setSortUsers] = useState(people
         .sort((a, b) => a.name > b.name ? 1 : -1));
     const [face, setFace] = useState(false);
-
-    const friends = state.searchPeople;
-    const text = state.searchText;
-    const reverse = state.reverse;
-    useEffect(() => {
-        actions.getAllUsers(people);
-    }, [friends]);
+    const { searchText, reverse, searchPeople } = state;
+    const friends = searchPeople.sort((a, b) => !reverse ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name));
 
    useEffect(() => {
-        actions.getAllUsers(people);
         const letter = [];
         const result = [];
         for (let i = 0; friends.length > i; i++) {
+            console.log("### Refered 2 useEffect " + friends[i].name);
+
             if (!letter.includes(friends[i].name[0])) {
                 letter.push(friends[i].name[0].toUpperCase());
                 result.push({ 'letter': friends[i].name[0].toUpperCase() });
@@ -44,14 +40,14 @@ const TableReferred: FC = () => {
             result.push(friends[i]);
         }
         setSortUsers(result);
-    }, [text, reverse, friends]);
+    }, [searchText, reverse]);
  
  useEffect(() => {
         if (friends.length > 0) {
             const letter = [];
             const result = [];
             for (let i = 0; friends.length > i; i++) {
-                console.log(friends[i].name);
+                console.log("### Referred 3 useEffect " + friends[i].name);
                 if (!letter.includes(friends[i].name[0])) {
                     letter.push(friends[i].name[0].toUpperCase());
                     result.push({ 'letter': friends[i].name[0].toUpperCase() });
@@ -73,7 +69,7 @@ const TableReferred: FC = () => {
             setSortUsers(result);
             actions.getSearchPeople(result);
         }
-    }, [friends]);
+    }, []);
 
     const indexOfLastUsers = currentPage * showUsers;
     const indexOfFirstUsers = indexOfLastUsers - showUsers;

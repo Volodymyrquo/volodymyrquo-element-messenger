@@ -23,12 +23,12 @@ const AllContacts: FC = () => {
         setDefaultSelect(value);
         if ("A-Z" === value) {
             actions.performUnfolding(false);
-            actions.getSortUsers(people);
+            actions.getAllUsers(people);
         }
 
         if ("Z-A" === value) {
             actions.performUnfolding(true);
-            actions.getSortUsers(people);
+            actions.getAllUsers(people);
         }
     };
 
