@@ -22,9 +22,8 @@ const ContactBookPage: FC = () => {
         getSearchPeople(value);
     };
     const handleGroupsItem = ({ target: { value } }) => {
-       
         setGroupsItem(value);
-            getGroup(value);
+        getGroup(value);
     };
     const handleInputChange = ({ target: { value } }) => {
         setDefaultSelect(value);
@@ -100,10 +99,12 @@ const ContactBookPage: FC = () => {
                         <i className="icon-money" />
 
                     </button>
-                    <button disabled={true} className="contact-book__btn">
+                    <button className="contact-book__btn"
+                         onClick={()=>setPage("sendReferral")}>
                         <span>Send referrals</span>
                         <i className="icon-User" />
                     </button>
+
                 </div>
             </section>
             {table}

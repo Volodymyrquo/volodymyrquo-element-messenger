@@ -1,5 +1,5 @@
 import React, { FC, useContext } from 'react';
-import Modal, { IProps } from './modal';
+import Modal, { IProps } from '../modal';
 import Close from '../../../../../res/images/contactBook/close.png';
 import file from '../../../../../res/images/contactBook/file-text.svg';
 import { ContactBookContext } from "../../../../context/ContactBook/contextContactBook";
@@ -87,7 +87,9 @@ const ImportContactsModal: FC<IProps> = ({ onClick }) => {
                         </a>
                         <button
                             onClick={() => {
-                                history.push(location.pathname);
+                                setPage("contactBook");
+                                setTable("allContacts")
+
                             }}
                             className="import-contacts-modal__button-cancel"
                             type="button"

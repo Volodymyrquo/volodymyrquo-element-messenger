@@ -6,6 +6,9 @@ import TableGroupsItem from "../components/views/contactBook/TableGroupsItem";
 import ContactBookPage from "../components/views/contactBook/ContactBookPage";
 import ImportContactsModal from "../components/views/contactBook/ImportContactsModal/ImportContactsModal";
 import ImportLoaderModal from "../components/views/contactBook/ImportContactsModal/ImportLoaderModal";
+import SendReferralModal from "../components/views/contactBook/SendReferralModal/SendReferralModal";
+import SendModal from "../components/views/contactBook/SendReferralModal/SendModal";
+import SendingMessage from "../components/views/contactBook/SendReferralModal/PercentageSentModal";
 import ContactCash from "../components/views/contactBook/ContactCash";
 import { initialState } from "./contextReducer";
 
@@ -41,6 +44,9 @@ export const Provider = ({ children }) => {
         importContacts: <ImportContactsModal />,
         importLoader: <ImportLoaderModal />,
         contactCash: <ContactCash />,
+        sendReferral: <SendReferralModal />,
+        sendModal: <SendModal />,
+        sendingMessage: <SendingMessage />,
     };
     const tables = {
         myFavourites: <TableContacts />,
@@ -51,7 +57,7 @@ export const Provider = ({ children }) => {
     };
     const table = tables[state.tableId];
     const page = pages[state.pageId];
-    const { params, burger } = state;
+    const { params } = state;
     return (
         <Context.Provider
             value={{
@@ -62,7 +68,6 @@ export const Provider = ({ children }) => {
                 page,
                 params,
                 table,
-                burger,
             }}
         >
             {children}

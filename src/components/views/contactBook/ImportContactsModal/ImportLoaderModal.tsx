@@ -1,6 +1,6 @@
 import React, { FC, useContext } from 'react';
 import Confetti from "react-confetti";
-import Modal, { IProps } from './modal';
+import Modal, { IProps } from '../modal';
 import Close from '../../../../../res/images/contactBook/close.png';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import box from '../../../../../res/images/contactBook/box.svg';
@@ -9,7 +9,7 @@ import { Context } from "../../../../context/context";
 
 const ImportLoaderModal: FC<IProps> = ({ onClick }) => {
     const { state } = useContext(ContactBookContext);
-    const { setPage } = useContext(Context);
+    const { setPage,setTable } = useContext(Context);
 
     const download = state.download;
 
@@ -26,7 +26,8 @@ const ImportLoaderModal: FC<IProps> = ({ onClick }) => {
                                 src={Close}
                                 alt="Close modal"
                                 onClick={() => {
-                                    setPage("allContacts");
+                                    setPage("contactBook");
+                                    setTable("allContacts")
                                 }}
                             />
                         </div>
@@ -46,12 +47,18 @@ const ImportLoaderModal: FC<IProps> = ({ onClick }) => {
                             <button
                                 className="import-download-modal__button"
                                 type="button"
+                                onClick={() => {
+                                    setPage("contactBook");
+                                    setTable("allContacts")
+                                }}
+
                             >
                 Continue
                             </button>
                             <button
                                 onClick={() => {
-                                    setPage("allContacts");
+                                    setPage("contactBook");
+                                    setTable("allContacts")
                                 }}
                                 className="import-download-modal__button-cancel"
                                 type="button"
@@ -71,7 +78,8 @@ const ImportLoaderModal: FC<IProps> = ({ onClick }) => {
                                 src={Close}
                                 alt="Close modal"
                                 onClick={() => {
-                                    setPage("allContacts");
+                                    setPage("contactBook");
+                                    setTable("allContacts")
                                 }}
                             />
                         </div>
