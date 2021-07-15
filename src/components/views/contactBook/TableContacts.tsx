@@ -33,7 +33,7 @@ const TableContacts: FC = () => {
             result.push(friends[i]);
         }
         setSortUsers(result);
-    }, [searchText, reverse,groupName]);
+    }, [searchText, reverse, groupName]);
 
     useEffect(() => {
         if (friends.length > 0) {
@@ -144,10 +144,14 @@ const TableContacts: FC = () => {
                             <tr className="contact-book__list-alph">
                                 {alph.map((letter) => (
                                     <td
-
-                                        /*                                         className={friends.some(man => man.name[0] === letter) ? "contact-book__item-alph-true" : "contact-book__item-alph"}
- */ key={letter}
-                                        onClick={()=>{
+                                       
+                                        className={
+                                            friends.some((man) => man.name[0] === letter)
+                                                ? 'contact-book__item-alph-true'
+                                                : 'contact-book__item-alph'
+                                        }
+                                        key={letter}
+                                        onClick={() => {
                                             //@ts-ignore
                                             openTheWholeList(letter);
                                         }}

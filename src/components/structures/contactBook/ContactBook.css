@@ -471,7 +471,7 @@ h6 {
 .contact-book__list-alph {
     display: flex;
     position: absolute;
-    z-index: 10000;
+    z-index: 100;
     list-style-type: none;
     right: 0;
     top: 49px;
@@ -503,6 +503,7 @@ h6 {
 }
 .contact-book__item-alph:hover {
     transform: scale(1.2);
+    cursor: pointer;
 }
 .contact-book__item-alph-true {
     display: flex;
@@ -521,6 +522,7 @@ h6 {
 }
 .contact-book__item-alph-true:hover {
     transform: scale(1.2);
+    cursor: pointer;
 }
 .contact-book__head-table {
     font-family: "DM Sans" !important;
