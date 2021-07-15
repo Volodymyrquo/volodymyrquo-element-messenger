@@ -12,7 +12,7 @@ export const people = [
       "https://i.ibb.co/GFp64yS/Instagram.png",
       "https://i.ibb.co/pXwrc7y/Twitter.png"
     ],
-    group: 'Family',
+    group: 'My family',
     letter: null,
     completed: false
   },
@@ -27,7 +27,7 @@ export const people = [
       "https://i.ibb.co/c3tbNb8/In.png",
       "https://i.ibb.co/pXwrc7y/Twitter.png"
     ],
-    group: 'Family',
+    group: 'My family',
     letter: null,
     completed: false
   },
@@ -41,7 +41,7 @@ export const people = [
     social: [
       "https://i.ibb.co/GFp64yS/Instagram.png"
     ],
-    group: '',
+    group: 'My trust circle',
     letter: null,
     completed: false
   },
@@ -50,13 +50,13 @@ export const people = [
     img: "https://i.ibb.co/sqY8mth/Amanda-Miller.png",
     flag: "https://i.ibb.co/VQLVcww/Eng.png",
     name: 'Amanda Miller',
-    email: '',
+    email: 'My colleagues',
     phonNumber: '+44 741 835 0263',
     social: [
       "https://i.ibb.co/6rw5tTF/facebook.png",
       "https://i.ibb.co/pXwrc7y/Twitter.png"
     ],
-    group: 'Family',
+    group: 'My family',
     letter: null,
     completed: false
   },
@@ -72,7 +72,7 @@ export const people = [
       "https://i.ibb.co/c3tbNb8/In.png",
       "https://i.ibb.co/GFp64yS/Instagram.png"
     ],
-    group: '',
+    group: 'My trust circle',
     letter: null,
     completed: false
   },
@@ -88,7 +88,7 @@ export const people = [
       "https://i.ibb.co/GFp64yS/Instagram.png",
       "https://i.ibb.co/pXwrc7y/Twitter.png"
     ],
-    group: 'Family',
+    group: 'My family',
     letter: null,
     completed: false
   },
@@ -121,7 +121,7 @@ export const people = [
       "https://i.ibb.co/GFp64yS/Instagram.png",
       "https://i.ibb.co/pXwrc7y/Twitter.png"
     ],
-    group: 'Family',
+    group: 'My friends',
     letter: null,
     completed: false
   },
@@ -138,7 +138,7 @@ export const people = [
       "https://i.ibb.co/GFp64yS/Instagram.png",
       "https://i.ibb.co/pXwrc7y/Twitter.png"
     ],
-    group: '',
+    group: 'My colleagues',
     letter: null,
     completed: false
   },
@@ -153,7 +153,7 @@ export const people = [
       "https://i.ibb.co/GFp64yS/Instagram.png",
       "https://i.ibb.co/pXwrc7y/Twitter.png"
     ],
-    group: '',
+    group: 'My friends',
     letter: null,
     completed: false
   },
@@ -168,7 +168,7 @@ export const people = [
       "https://i.ibb.co/GFp64yS/Instagram.png",
       "https://i.ibb.co/pXwrc7y/Twitter.png"
     ],
-    group: '',
+    group: 'My friends',
     letter: null,
     completed: false
   },

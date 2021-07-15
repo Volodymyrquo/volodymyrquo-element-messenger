@@ -16,8 +16,11 @@ const TableContacts: FC = () => {
     const [showUsers, setShowUsers] = useState(10);
     const [sortUsers, setSortUsers] = useState(people.sort((a, b) => a.name > b.name ? 1 : -1));
     const [face, setFace] = useState(false);
-    const { searchText, reverse, searchPeople } = state;
-    const friends = searchPeople.sort((a, b) => !reverse ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name));
+    const { searchText, reverse, searchPeople, groupName } = state;
+    const azSorted = searchPeople.sort((a, b) => !reverse ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name));
+    const friends = azSorted.filter(user => {
+        if (groupName == "All") {return user;} else {return user.group.includes(groupName);}
+    });
 
     useEffect(() => {
         const letter = [];
@@ -30,7 +33,7 @@ const TableContacts: FC = () => {
             result.push(friends[i]);
         }
         setSortUsers(result);
-    }, [searchText, reverse]);
+    }, [searchText, reverse,groupName]);
 
     useEffect(() => {
         if (friends.length > 0) {

@@ -1,31 +1,12 @@
 import React, { FC, useState, useContext } from 'react';
 import classNames from 'classnames';
 import { Context } from "../../../context/context";
+import {groupsItems} from "../../../../res/helpers/groups"
+import {v4 as uuidv4} from 'uuid'
+import { ContactBookContext } from "../../../context/ContactBook/contextContactBook";
 
 
 
-const groupsItems = [
-    {
-        name: "My family",
-        table: "groupsItem",
-        activeClass: "allContactsBtn",
-    },
-    {
-        name: "My friends",
-        table: "groupsItem",
-        activeClass: "myFavouritesBtn",
-    },
-    {
-        name: "My trust circle",
-        table: "groupsItem",
-        activeClass: "recentlyAddedBtn",
-    },
-    {
-        name: "My colleagues",
-        table: "groupsItem",
-        activeClass: "referredContactBook",
-    },
-];
 
 const NavigationGroups: FC = () => {
     const [allContactsBtn, setAllContactsBtn] = useState(true);
@@ -33,15 +14,18 @@ const NavigationGroups: FC = () => {
     const [recentlyAddedBtn, setRecentlyAddedBtn] = useState(false);
     const [referredContactBook, setReferredContactBook] = useState(false);
     const { setPage, setParams, setTable } = useContext(Context);
+    const {actions} = useContext(ContactBookContext)
+     const {getGroup} =  actions
 
     return (
 
         <ul className="metismenu list-unstyled" id="side-menu" >
-            {groupsItems.map((item, idx) => {
+            {groupsItems.map(item => {
                 const params = {
                 name: item.name,
+            
                 };
-                return <li key={idx}
+                return <li key={uuidv4()}
 
                 ><a href="/#/contact_book"
                         className={classNames("contact-book__item", /* {
@@ -53,8 +37,10 @@ const NavigationGroups: FC = () => {
                         setRecentlyAddedBtn(false);
                         setReferredContactBook(false);
  */ setPage("contactBook");
+
                             setTable(item.table);
                             setParams(params);
+                            getGroup(item.name);
                         }}
                     >
                         <i className="icon-User" />

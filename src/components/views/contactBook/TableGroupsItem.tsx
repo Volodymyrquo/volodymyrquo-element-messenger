@@ -17,15 +17,17 @@ const icons = [facebook, instagram, linkedin, twitter, pinterest, discord, youtu
 
 //@ts-ignore
 const TableGroupsItem: FC = () => {
-    const { actions, state } = useContext(ContactBookContext);
+    const { state, actions }= useContext(ContactBookContext);
 
     const [currentPage, setCurrentPage] = useState(1);
     const [showUsers, setShowUsers] = useState(10);
-    const [sortUsers, setSortUsers] = useState(people
-        .sort((a, b) => a.name > b.name ? 1 : -1));
+    const [sortUsers, setSortUsers] = useState(people.sort((a, b) => a.name > b.name ? 1 : -1));
     const [face, setFace] = useState(false);
-    const { searchText, reverse, searchPeople } = state;
-    const friends = searchPeople.sort((a, b) => !reverse ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name));
+    const { searchText, reverse, searchPeople, groupName } = state;
+    const azSorted = searchPeople.sort((a, b) => !reverse ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name));
+    const friends = azSorted.filter(user => {
+        if (groupName == "All") {return user;} else {return user.group.includes(groupName);}
+    });
 
    useEffect(() => {
         const letter = [];
@@ -39,7 +41,7 @@ const TableGroupsItem: FC = () => {
             result.push(friends[i]);
         }
         setSortUsers(result);
-    }, [searchText, reverse]);
+    }, [searchText, reverse, groupName]);
  
  useEffect(() => {
         if (friends.length > 0) {

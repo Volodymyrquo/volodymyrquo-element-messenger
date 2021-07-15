@@ -5,6 +5,7 @@ export interface ContactBookState {
   sendLetter: string;
   reverse: boolean;
   download: number;
+  groupName: string;
 }
 
 export interface ContactBookAction {
@@ -15,4 +16,5 @@ export interface ContactBookAction {
   sendLetter: string;
   download: number;
   type: string;
+  groupName: string;
 }

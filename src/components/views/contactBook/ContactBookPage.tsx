@@ -5,20 +5,27 @@ import search from '../../../../res/images/contactBook/search.svg';
 import { people } from '../../../../res/helpers/people';
 import { ContactBookContext } from "../../../context/ContactBook/contextContactBook";
 import { Context } from "../../../context/context";
+import { groupsItems } from "../../../../res/helpers/groups";
+import { v4 as uuidv4 } from 'uuid';
 
 const ContactBookPage: FC = () => {
     const { actions } = useContext(ContactBookContext);
-    const {table, params, setBurger, burger} = useContext(Context)
+    const { table, params, setPage } = useContext(Context);
     const [textValue, setTextValue] = useState('');
     const [defaultSelect, setDefaultSelect] = useState("A-Z");
-    const { getSearchText, getSearchPeople, performUnfolding, getAllUsers } = actions;
+    const [groupsItem, setGroupsItem] = useState("All");
+    const { getSearchText, getSearchPeople, performUnfolding, getAllUsers, getGroup } = actions;
 
     const findUser = ({ target: { value } }) => {
         setTextValue(value);
         getSearchText(value);
         getSearchPeople(value);
     };
-
+    const handleGroupsItem = ({ target: { value } }) => {
+       
+        setGroupsItem(value);
+            getGroup(value);
+    };
     const handleInputChange = ({ target: { value } }) => {
         setDefaultSelect(value);
         if ("A-Z" === value) {
@@ -64,8 +71,12 @@ const ContactBookPage: FC = () => {
               Sort by: Z-A
                             </option>
                         </select>
-                        <select className="contact-book__groups">
-                            <option value="all">Groups: All</option>
+                        <select className="contact-book__groups"
+                            value={groupsItem}
+                            onChange={handleGroupsItem}
+                        >
+                            {groupsItems.map(item => <option key={uuidv4()} value={item.name}>Groups: {item.name}</option> )}
+
                         </select>
                     </div>
                     <div className="contact-book__find-blok">
@@ -84,7 +95,7 @@ const ContactBookPage: FC = () => {
                     </div>
                 </div>
                 <div className="contact-book__btn-inner">
-                    <button className="contact-book__btn">
+                    <button className="contact-book__btn" onClick={()=>setPage("contactCash")}>
                         <span>ContactBook cash</span>
                         <i className="icon-money" />
 
@@ -95,10 +106,9 @@ const ContactBookPage: FC = () => {
                     </button>
                 </div>
             </section>
-           {table}
+            {table}
         </section>
     );
 };
 export default ContactBookPage;
-
 

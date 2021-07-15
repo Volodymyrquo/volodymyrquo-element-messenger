@@ -1,6 +1,7 @@
 import React, { FC, useState, useContext } from 'react';
 import classNames from 'classnames';
 import { Context } from "../../../context/context";
+import { ContactBookContext } from "../../../context/ContactBook/contextContactBook";
 
 const NavigationSidebar: FC = () => {
     const [allContactsBtn, setAllContactsBtn] = useState(true);
@@ -8,6 +9,8 @@ const NavigationSidebar: FC = () => {
     const [recentlyAddedBtn, setRecentlyAddedBtn] = useState(false);
     const [referredContactBook, setReferredContactBook] = useState(false);
     const { setPage, setTable, setParams } = useContext(Context);
+    const {actions} = useContext(ContactBookContext)
+     const {getGroup} =  actions
 
     return (
         <ul className="metismenu list-unstyled" id="side-menu">
@@ -25,6 +28,7 @@ const NavigationSidebar: FC = () => {
                         setPage("contactBook");
                         setTable("allContacts");
                         setParams({ name: "All contacts" });
+                        getGroup("All")
                     }}
                 >
                     <i className="icon-User" />
@@ -47,6 +51,7 @@ const NavigationSidebar: FC = () => {
                         setTable("myFavourites");
                         setPage("contactBook");
                         setParams({ name: "My favourites" });
+                        getGroup("All")
 
                     }}
                 >
@@ -69,6 +74,7 @@ const NavigationSidebar: FC = () => {
                         setTable("recentlyAdded");
                         setPage("contactBook");
                         setParams({ name: "Recently added" });
+                        getGroup("All")
 
                     }}
                 >
@@ -91,6 +97,7 @@ const NavigationSidebar: FC = () => {
                         setTable("referred");
                         setPage("contactBook");
                         setParams({ name: "Referred" });
+                        getGroup("All")
 
                     }}
                 >

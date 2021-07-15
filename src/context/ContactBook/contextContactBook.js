@@ -8,6 +8,7 @@ import {
     REVERSE_TYPE,
     SEND_LETTER,
     DOWNLOAD_SMS,
+    SEARCH_GROUP,
 } from "./actionTypes";
 
 export const ContactBookContext = createContext(initialState);
@@ -19,6 +20,11 @@ export const ContactBookProvider = ({ children }) => {
             dispatch({
                 type: USERS_TYPE,
                 users,
+            }),
+        getGroup: (groupName) =>
+            dispatch({
+                type: SEARCH_GROUP,
+                groupName,
             }),
         getSearchPeople: (searchPeople) =>
             dispatch({
