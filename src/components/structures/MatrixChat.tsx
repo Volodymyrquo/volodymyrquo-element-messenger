@@ -15,7 +15,7 @@ limitations under the License.
 */
 
 import React, { createRef } from 'react';
-import { createClient } from "matrix-js-sdk/src/matrix";
+ import { createClient } from "matrix-js-sdk/src/matrix";
 import { InvalidStoreError } from "matrix-js-sdk/src/errors";
 import { RoomMember } from "matrix-js-sdk/src/models/room-member";
 import { MatrixEvent } from "matrix-js-sdk/src/models/event";

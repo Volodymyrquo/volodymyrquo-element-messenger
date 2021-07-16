@@ -14,15 +14,15 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import type {Room} from "matrix-js-sdk/src/models/room";
+import type { Room } from "matrix-js-sdk/src/models/room";
 
 import ScalarAuthClient from "matrix-react-sdk/src/ScalarAuthClient";
-import {dialogTermsInteractionCallback, TermsNotSignedError} from "matrix-react-sdk/src/Terms";
+import { dialogTermsInteractionCallback, TermsNotSignedError } from "matrix-react-sdk/src/Terms";
 import Modal from 'matrix-react-sdk/src/Modal';
 import url from 'url';
 import SettingsStore from "matrix-react-sdk/src/settings/SettingsStore";
-import {IntegrationManagers} from "./SumraIntegrationManagers";
-import * as sdk from "matrix-react-sdk/src/index"
+import { IntegrationManagers } from "./SumraIntegrationManagers";
+import * as sdk from "matrix-react-sdk/src/index";
 
 export enum Kind {
     Account = "account",
@@ -61,14 +61,14 @@ export class IntegrationManagerInstance {
     }
 
     async open(room: Room = null, screen: string = null, integrationId: string = null): Promise<void> {
-const IntegrationManager = sdk.getComponent("views.settings.IntegrationManager")
+        const IntegrationManager = sdk.getComponent("views.settings.IntegrationManager");
         if (!SettingsStore.getValue("integrationProvisioning")) {
             return IntegrationManagers.sharedInstance().showDisabledDialog();
         }
 
         const dialog = Modal.createTrackedDialog(
             'Integration Manager', '', IntegrationManager,
-            {loading: true}, 'mx_IntegrationManager',
+            { loading: true }, 'mx_IntegrationManager',
         );
 
         const client = this.getScalarClient();

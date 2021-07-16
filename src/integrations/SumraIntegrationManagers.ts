@@ -14,24 +14,20 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-
-import type {MatrixClient} from "matrix-js-sdk/src/client";
-import type {MatrixEvent} from "matrix-js-sdk/src/models/event";
-import type {Room} from "matrix-js-sdk/src/models/room";
+import type { MatrixClient } from "matrix-js-sdk/src/client";
+import type { MatrixEvent } from "matrix-js-sdk/src/models/event";
+import type { Room } from "matrix-js-sdk/src/models/room";
 
 import SdkConfig from 'matrix-react-sdk/src/SdkConfig';
 import Modal from 'matrix-react-sdk/src/Modal';
 
-import * as sdk from "matrix-react-sdk/src/index"
-import {MatrixClientPeg} from "matrix-react-sdk/src/MatrixClientPeg";
+import * as sdk from "matrix-react-sdk/src/index";
+import { MatrixClientPeg } from "matrix-react-sdk/src/MatrixClientPeg";
 import SettingsStore from "matrix-react-sdk/src/settings/SettingsStore";
 import url from 'url';
 import { compare } from "matrix-react-sdk/src/utils/strings";
 import WidgetUtils from "../utils/SumraWidgetUtils";
-import {IntegrationManagerInstance, Kind} from "./SumraIntegrationManagerInstance";
-
-
-
+import { IntegrationManagerInstance, Kind } from "./SumraIntegrationManagerInstance";
 
 const KIND_PREFERENCE = [
     // Ordered: first is most preferred, last is least preferred.
@@ -176,12 +172,12 @@ export class IntegrationManagers {
     }
 
     openNoManagerDialog(): void {
-const IntegrationsImpossibleDialog = sdk.getComponent("views.dialogs.IntegrationsImpossibleDialog")
+        const IntegrationsImpossibleDialog = sdk.getComponent("views.dialogs.IntegrationsImpossibleDialog");
         Modal.createTrackedDialog('Integrations impossible', '', IntegrationsImpossibleDialog);
     }
 
     openAll(room: Room = null, screen: string = null, integrationId: string = null): void {
-        const TabbedIntegrationManagerDialog = sdk.getComponent("views.dialogs.TabbedIntegrationManagerDialog")
+        const TabbedIntegrationManagerDialog = sdk.getComponent("views.dialogs.TabbedIntegrationManagerDialog");
         if (!SettingsStore.getValue("integrationProvisioning")) {
             return this.showDisabledDialog();
         }
@@ -192,12 +188,12 @@ const IntegrationsImpossibleDialog = sdk.getComponent("views.dialogs.Integration
 
         Modal.createTrackedDialog(
             'Tabbed Integration Manager', '', TabbedIntegrationManagerDialog,
-            {room, screen, integrationId}, 'mx_TabbedIntegrationManagerDialog',
+            { room, screen, integrationId }, 'mx_TabbedIntegrationManagerDialog',
         );
     }
 
     showDisabledDialog(): void {
-        const IntegrationsDisabledDialog = sdk.getComponent("views.dialogs.IntegrationsDisabledDialog")
+        const IntegrationsDisabledDialog = sdk.getComponent("views.dialogs.IntegrationsDisabledDialog");
         Modal.createTrackedDialog('Integrations disabled', '', IntegrationsDisabledDialog);
     }
 
